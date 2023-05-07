@@ -6,11 +6,12 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/06 19:13:13 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/07 15:58:36 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include "Bureaucrat.hpp"
 
 int	main(void)
 {
