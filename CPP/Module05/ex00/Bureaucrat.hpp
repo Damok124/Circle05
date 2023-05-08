@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/07 17:36:37 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/08 08:43:04 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUREAUCRAT_HPP
 
 # include <iostream>
+# include <stdexcept>
 
 class Bureaucrat {
 	public :
@@ -30,10 +31,14 @@ class Bureaucrat {
 		void	downGrade();
 
 		class GradeTooHighException : public std::exception {
-
+			public :
+				GradeTooHighException();
+				virtual const char* what() const throw();
 		};
 		class GradeTooLowException : public std::exception {
-
+			public :
+				GradeTooLowException();
+				virtual const char* what() const throw();
 		};
 
 	private :
