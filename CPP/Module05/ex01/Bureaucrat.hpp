@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/11 18:07:38 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/11 16:12:27 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@ class Bureaucrat
 		int					grade;
 
 	public :
-							Bureaucrat(std::string name, int grade);
-							Bureaucrat(Bureaucrat const& source);
-							Bureaucrat& operator=(Bureaucrat const& source);
-							~Bureaucrat();
+					Bureaucrat(std::string name, int grade);
+					Bureaucrat(Bureaucrat const& source);
+					Bureaucrat& operator=(Bureaucrat const& source);
+					~Bureaucrat();
 
-		std::string	const	getName() const;
-		int					getGrade() const;
+		std::string	getName() const;
+		int			getGrade() const;
 
-		void				upGrade();
-		void				downGrade();
+		void		upGrade();
+		void		downGrade();
 
 		class GradeTooHighException : public std::exception
 		{
