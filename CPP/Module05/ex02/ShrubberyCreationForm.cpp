@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:36 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/12 18:35:53 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-Form::Form()
+ShrubberyCreationForm::ShrubberyCreationForm() \
+: AForm()
 {
 	_signed = false;
-	// std::cout << "--Form constructor--" << std::endl;
+	// std::cout << "--ShrubberyCreationForm constructor--" << std::endl;
 }
 
-Form::Form(std::string const name, int signatureGrade, int executionGrade) : _name(name)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const name, int signatureGrade, int executionGrade) \
+: AForm(name, signatureGrade, executionGrade)
 {
 	if (signatureGrade < 1)
 		throw (GradeTooHighException());
@@ -33,16 +35,17 @@ Form::Form(std::string const name, int signatureGrade, int executionGrade) : _na
 		throw (GradeTooLowException());
 	_executionGrade = executionGrade;
 	_signed = false;
-	// std::cout << "--Form param constructor--" << std::endl;
+	// std::cout << "--ShrubberyCreationForm param constructor--" << std::endl;
 }
 
-Form::Form(Form const& source) : _name(source.getName()), _signed(false),
-_signatureGrade(source.getSignatureGrade()), _executionGrade(source.getExecutionGrade())
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& source) \
+: AForm(source.getName(), source.getSignatureGrade(), source.getExecutionGrade())
 {
-	// std::cout << "--Form copy--" << std::endl;
+	_signed = false;
+	// std::cout << "--ShrubberyCreationForm copy--" << std::endl;
 }
 
-Form& Form::operator=(Form const& source)
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const& source)
 {
 	if (this != &source)
 	{
@@ -51,39 +54,39 @@ Form& Form::operator=(Form const& source)
 		_signed = source.getIsSigned();
 	}
 	return (*this);
-	// std::cout << "--Form assignation--" << std::endl;
+	// std::cout << "--ShrubberyCreationForm assignation--" << std::endl;
 }
 
-Form::~Form()
+ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-	// std::cout << "--Form destructor--" << std::endl;
+	// std::cout << "--ShrubberyCreationForm destructor--" << std::endl;
 }
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	Form::getName() const
+std::string const	ShrubberyCreationForm::getName() const
 {
 	return (_name);
 }
 
-bool	Form::getIsSigned() const
+bool	ShrubberyCreationForm::getIsSigned() const
 {
 	return (_signed);
 }
 
-int	Form::getSignatureGrade() const
+int	ShrubberyCreationForm::getSignatureGrade() const
 {
 	return (_signatureGrade);
 }
 
-int	Form::getExecutionGrade() const
+int	ShrubberyCreationForm::getExecutionGrade() const
 {
 	return (_executionGrade);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	Form::beSigned(Bureaucrat const& bureaucrat)
+void	ShrubberyCreationForm::beSigned(Bureaucrat const& bureaucrat)
 {
 	if (getIsSigned() == false)
 	{
@@ -94,7 +97,7 @@ void	Form::beSigned(Bureaucrat const& bureaucrat)
 	}
 }
 
-void	Form::signForm(Bureaucrat const& bureaucrat) const
+void	ShrubberyCreationForm::signForm(Bureaucrat const& bureaucrat) const
 {
 	if (getIsSigned() == true)
 		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
@@ -105,19 +108,19 @@ void	Form::signForm(Bureaucrat const& bureaucrat) const
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const char* Form::GradeTooHighException::what() const throw()
+const char* ShrubberyCreationForm::GradeTooHighException::what() const throw()
 {
 	return ("Error : Grade definition too high");
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* ShrubberyCreationForm::GradeTooLowException::what() const throw()
 {
 	return ("Error : Grade definition too low");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::ostream& operator<<(std::ostream& out, Form const& inst)
+std::ostream& operator<<(std::ostream& out, ShrubberyCreationForm const& inst)
 {
 	out << "Form " << inst.getName() << " :"
 	<< "\n\t- Signed\t\t: " << std::boolalpha << inst.getIsSigned()

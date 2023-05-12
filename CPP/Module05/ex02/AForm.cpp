@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:36 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/12 17:53:22 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-Form::Form()
+AForm::AForm()
 {
 	_signed = false;
-	// std::cout << "--Form constructor--" << std::endl;
+	// std::cout << "--AForm constructor--" << std::endl;
 }
 
-Form::Form(std::string const name, int signatureGrade, int executionGrade) : _name(name)
+AForm::AForm(std::string const name, int signatureGrade, int executionGrade) : _name(name)
 {
 	if (signatureGrade < 1)
 		throw (GradeTooHighException());
@@ -33,16 +33,16 @@ Form::Form(std::string const name, int signatureGrade, int executionGrade) : _na
 		throw (GradeTooLowException());
 	_executionGrade = executionGrade;
 	_signed = false;
-	// std::cout << "--Form param constructor--" << std::endl;
+	// std::cout << "--AForm param constructor--" << std::endl;
 }
 
-Form::Form(Form const& source) : _name(source.getName()), _signed(false),
+AForm::AForm(AForm const& source) : _name(source.getName()), _signed(false),
 _signatureGrade(source.getSignatureGrade()), _executionGrade(source.getExecutionGrade())
 {
-	// std::cout << "--Form copy--" << std::endl;
+	// std::cout << "--AForm copy--" << std::endl;
 }
 
-Form& Form::operator=(Form const& source)
+AForm& AForm::operator=(AForm const& source)
 {
 	if (this != &source)
 	{
@@ -51,39 +51,39 @@ Form& Form::operator=(Form const& source)
 		_signed = source.getIsSigned();
 	}
 	return (*this);
-	// std::cout << "--Form assignation--" << std::endl;
+	// std::cout << "--AForm assignation--" << std::endl;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	// std::cout << "--Form destructor--" << std::endl;
+	// std::cout << "--AForm destructor--" << std::endl;
 }
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	Form::getName() const
+std::string const	AForm::getName() const
 {
 	return (_name);
 }
 
-bool	Form::getIsSigned() const
+bool	AForm::getIsSigned() const
 {
 	return (_signed);
 }
 
-int	Form::getSignatureGrade() const
+int	AForm::getSignatureGrade() const
 {
 	return (_signatureGrade);
 }
 
-int	Form::getExecutionGrade() const
+int	AForm::getExecutionGrade() const
 {
 	return (_executionGrade);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	Form::beSigned(Bureaucrat const& bureaucrat)
+void	AForm::beSigned(Bureaucrat const& bureaucrat)
 {
 	if (getIsSigned() == false)
 	{
@@ -94,7 +94,7 @@ void	Form::beSigned(Bureaucrat const& bureaucrat)
 	}
 }
 
-void	Form::signForm(Bureaucrat const& bureaucrat) const
+void	AForm::signForm(Bureaucrat const& bureaucrat) const
 {
 	if (getIsSigned() == true)
 		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
@@ -105,19 +105,19 @@ void	Form::signForm(Bureaucrat const& bureaucrat) const
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const char* Form::GradeTooHighException::what() const throw()
+const char* AForm::GradeTooHighException::what() const throw()
 {
 	return ("Error : Grade definition too high");
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* AForm::GradeTooLowException::what() const throw()
 {
 	return ("Error : Grade definition too low");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::ostream& operator<<(std::ostream& out, Form const& inst)
+std::ostream& operator<<(std::ostream& out, AForm const& inst)
 {
 	out << "Form " << inst.getName() << " :"
 	<< "\n\t- Signed\t\t: " << std::boolalpha << inst.getIsSigned()

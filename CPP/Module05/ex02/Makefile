@@ -6,13 +6,18 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/05/06 07:31:10 by zharzi           ###   ########.fr        #
+#    Updated: 2023/05/12 18:23:49 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
 SRCS = \
+AForm.cpp \
+ShrubberyCreationForm.cpp \
+RobotomyRequestForm.cpp \
+PresidentialPardonForm.cpp \
+Bureaucrat.cpp \
 main.cpp
 
 OBJ = $(SRCS:.cpp=.o)

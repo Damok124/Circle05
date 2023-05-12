@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:36 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/12 20:50:42 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "PresidentialPardonForm.hpp"
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-Form::Form()
+PresidentialPardonForm::PresidentialPardonForm() \
+: AForm()
 {
 	_signed = false;
-	// std::cout << "--Form constructor--" << std::endl;
+	// std::cout << "--PresidentialPardonForm constructor--" << std::endl;
 }
 
-Form::Form(std::string const name, int signatureGrade, int executionGrade) : _name(name)
+PresidentialPardonForm::PresidentialPardonForm(std::string const name, int signatureGrade, int executionGrade) \
+: AForm(name, signatureGrade, executionGrade)
 {
 	if (signatureGrade < 1)
 		throw (GradeTooHighException());
@@ -33,16 +35,16 @@ Form::Form(std::string const name, int signatureGrade, int executionGrade) : _na
 		throw (GradeTooLowException());
 	_executionGrade = executionGrade;
 	_signed = false;
-	// std::cout << "--Form param constructor--" << std::endl;
+	// std::cout << "--PresidentialPardonForm param constructor--" << std::endl;
 }
 
-Form::Form(Form const& source) : _name(source.getName()), _signed(false),
-_signatureGrade(source.getSignatureGrade()), _executionGrade(source.getExecutionGrade())
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& source) \
+: AForm(source.getName(), source.getSignatureGrade(), source.getExecutionGrade())
 {
-	// std::cout << "--Form copy--" << std::endl;
+	// std::cout << "--PresidentialPardonForm copy--" << std::endl;
 }
 
-Form& Form::operator=(Form const& source)
+PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm const& source)
 {
 	if (this != &source)
 	{
@@ -51,39 +53,39 @@ Form& Form::operator=(Form const& source)
 		_signed = source.getIsSigned();
 	}
 	return (*this);
-	// std::cout << "--Form assignation--" << std::endl;
+	// std::cout << "--PresidentialPardonForm assignation--" << std::endl;
 }
 
-Form::~Form()
+PresidentialPardonForm::~PresidentialPardonForm()
 {
-	// std::cout << "--Form destructor--" << std::endl;
+	// std::cout << "--PresidentialPardonForm destructor--" << std::endl;
 }
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	Form::getName() const
+std::string const	PresidentialPardonForm::getName() const
 {
 	return (_name);
 }
 
-bool	Form::getIsSigned() const
+bool	PresidentialPardonForm::getIsSigned() const
 {
 	return (_signed);
 }
 
-int	Form::getSignatureGrade() const
+int	PresidentialPardonForm::getSignatureGrade() const
 {
 	return (_signatureGrade);
 }
 
-int	Form::getExecutionGrade() const
+int	PresidentialPardonForm::getExecutionGrade() const
 {
 	return (_executionGrade);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	Form::beSigned(Bureaucrat const& bureaucrat)
+void	PresidentialPardonForm::beSigned(Bureaucrat const& bureaucrat)
 {
 	if (getIsSigned() == false)
 	{
@@ -94,7 +96,7 @@ void	Form::beSigned(Bureaucrat const& bureaucrat)
 	}
 }
 
-void	Form::signForm(Bureaucrat const& bureaucrat) const
+void	PresidentialPardonForm::signForm(Bureaucrat const& bureaucrat) const
 {
 	if (getIsSigned() == true)
 		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
@@ -105,19 +107,19 @@ void	Form::signForm(Bureaucrat const& bureaucrat) const
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-const char* Form::GradeTooHighException::what() const throw()
+const char* PresidentialPardonForm::GradeTooHighException::what() const throw()
 {
 	return ("Error : Grade definition too high");
 }
 
-const char* Form::GradeTooLowException::what() const throw()
+const char* PresidentialPardonForm::GradeTooLowException::what() const throw()
 {
 	return ("Error : Grade definition too low");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::ostream& operator<<(std::ostream& out, Form const& inst)
+std::ostream& operator<<(std::ostream& out, PresidentialPardonForm const& inst)
 {
 	out << "Form " << inst.getName() << " :"
 	<< "\n\t- Signed\t\t: " << std::boolalpha << inst.getIsSigned()

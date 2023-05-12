@@ -6,13 +6,14 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/05/07 15:41:31 by zharzi           ###   ########.fr        #
+#    Updated: 2023/05/12 08:26:51 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
 SRCS = \
+Form.cpp \
 Bureaucrat.cpp \
 main.cpp
 
