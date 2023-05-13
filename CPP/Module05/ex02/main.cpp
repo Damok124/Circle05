@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 18:23:00 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 16:29:21 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,10 +328,34 @@ void testForms()
 	test13();
 }
 
+// int	main(void)
+// {
+// 	// testBureaucrat();
+// 	// std::cout << "====================================" << std::endl;
+// 	testForms();
+// 	return (0);
+// }
+
 int	main(void)
 {
-	// testBureaucrat();
-	// std::cout << "====================================" << std::endl;
-	testForms();
+	ShrubberyCreationForm shrub("T-1000");
+	RobotomyRequestForm robot("T-2000");
+	PresidentialPardonForm president("T-3000");
+	ShrubberyCreationForm shrub2(shrub);
+	RobotomyRequestForm robot2(robot);
+	PresidentialPardonForm president2(president);
+	AForm* a = &robot;
+	AForm* b = &president;
+	a = b;
+
+	std::cout << shrub << std::endl;
+	std::cout << robot << std::endl;
+	std::cout << president << std::endl;
+	std::cout << shrub2 << std::endl;
+	std::cout << robot2 << std::endl;
+	std::cout << president2 << std::endl;
+	std::cout << "==================" << std::endl;//check si ça fonctionne encore apres avoir reellement distinguer les classes
+	std::cout << *a << std::endl;
+	std::cout << *b << std::endl;
 	return (0);
 }

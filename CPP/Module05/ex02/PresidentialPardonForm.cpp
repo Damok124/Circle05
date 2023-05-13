@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 20:50:42 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 19:04:55 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,21 @@
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-PresidentialPardonForm::PresidentialPardonForm() \
-: AForm()
+PresidentialPardonForm::PresidentialPardonForm()
+: AForm("Presidential Pardon Form", 25, 5)
 {
-	_signed = false;
-	// std::cout << "--PresidentialPardonForm constructor--" << std::endl;
+	this->target = "[unknown]";
+	// std::cout << "--PresidentialPardonForm default constructor--" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string const name, int signatureGrade, int executionGrade) \
-: AForm(name, signatureGrade, executionGrade)
+PresidentialPardonForm::PresidentialPardonForm(std::string const target)
+: AForm("Presidential Pardon Form", 25, 5)
 {
-	if (signatureGrade < 1)
-		throw (GradeTooHighException());
-	else if (signatureGrade > 150)
-		throw (GradeTooLowException());
-	_signatureGrade = signatureGrade;
-	if (executionGrade < 1)
-		throw (GradeTooHighException());
-	else if (executionGrade > 150)
-		throw (GradeTooLowException());
-	_executionGrade = executionGrade;
-	_signed = false;
+	this->target = target;
 	// std::cout << "--PresidentialPardonForm param constructor--" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& source) \
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& source)
 : AForm(source.getName(), source.getSignatureGrade(), source.getExecutionGrade())
 {
 	// std::cout << "--PresidentialPardonForm copy--" << std::endl;
@@ -46,14 +36,9 @@ PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const& sou
 
 PresidentialPardonForm& PresidentialPardonForm::operator=(PresidentialPardonForm const& source)
 {
-	if (this != &source)
-	{
-		_signatureGrade = source.getSignatureGrade();
-		_executionGrade = source.getExecutionGrade();
-		_signed = source.getIsSigned();
-	}
-	return (*this);
+	(void)source;
 	// std::cout << "--PresidentialPardonForm assignation--" << std::endl;
+	return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
@@ -63,58 +48,23 @@ PresidentialPardonForm::~PresidentialPardonForm()
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	PresidentialPardonForm::getName() const
+std::string const	PresidentialPardonForm::getTarget() const
 {
-	return (_name);
-}
-
-bool	PresidentialPardonForm::getIsSigned() const
-{
-	return (_signed);
-}
-
-int	PresidentialPardonForm::getSignatureGrade() const
-{
-	return (_signatureGrade);
-}
-
-int	PresidentialPardonForm::getExecutionGrade() const
-{
-	return (_executionGrade);
+	return (target);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	PresidentialPardonForm::beSigned(Bureaucrat const& bureaucrat)
+void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	if (getIsSigned() == false)
-	{
-		if (bureaucrat.getGrade() <= getSignatureGrade())
-			_signed = true;
-		else
-			throw GradeTooLowException();
-	}
+	(void)executor;
 }
 
-void	PresidentialPardonForm::signForm(Bureaucrat const& bureaucrat) const
-{
-	if (getIsSigned() == true)
-		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-	else
-		std::cout << bureaucrat.getName() << " couldn't sign " << getName() \
-		<< " because it needs higher bureaucrat grade to be signed." << std::endl;
-}
+//=-= Exception -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-//=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-const char* PresidentialPardonForm::GradeTooHighException::what() const throw()
+const char*	PresidentialPardonForm::UnsignedForm::what() const throw()
 {
-	return ("Error : Grade definition too high");
-}
-
-const char* PresidentialPardonForm::GradeTooLowException::what() const throw()
-{
-	return ("Error : Grade definition too low");
+	return ("This form is not signed. Impossible to execute it.");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

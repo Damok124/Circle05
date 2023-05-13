@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 18:37:57 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 14:47:23 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 class AForm
 {
 	private :
-							AForm();
 		std::string const	_name;
 		bool				_signed;
 		int					_signatureGrade;
 		int					_executionGrade;
 
 	public :
+				AForm();
 				AForm(std::string const name, int signatureGrade, int executionGrade);
 				AForm(AForm const& source);
 				AForm& operator=(AForm const& source);

@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 18:35:53 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 19:16:35 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,31 @@
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-ShrubberyCreationForm::ShrubberyCreationForm() \
-: AForm()
+ShrubberyCreationForm::ShrubberyCreationForm()
+: AForm("Shrubbery Creation Form", 145, 137)
 {
-	_signed = false;
-	// std::cout << "--ShrubberyCreationForm constructor--" << std::endl;
+	this->target = "[unknown]";
+	// std::cout << "--ShrubberyCreationForm default constructor--" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const name, int signatureGrade, int executionGrade) \
-: AForm(name, signatureGrade, executionGrade)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const target)
+: AForm("Shrubbery Creation Form", 145, 137)
 {
-	if (signatureGrade < 1)
-		throw (GradeTooHighException());
-	else if (signatureGrade > 150)
-		throw (GradeTooLowException());
-	_signatureGrade = signatureGrade;
-	if (executionGrade < 1)
-		throw (GradeTooHighException());
-	else if (executionGrade > 150)
-		throw (GradeTooLowException());
-	_executionGrade = executionGrade;
-	_signed = false;
+	this->target = target;
 	// std::cout << "--ShrubberyCreationForm param constructor--" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& source) \
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const& source)
 : AForm(source.getName(), source.getSignatureGrade(), source.getExecutionGrade())
 {
-	_signed = false;
 	// std::cout << "--ShrubberyCreationForm copy--" << std::endl;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(ShrubberyCreationForm const& source)
 {
-	if (this != &source)
-	{
-		_signatureGrade = source.getSignatureGrade();
-		_executionGrade = source.getExecutionGrade();
-		_signed = source.getIsSigned();
-	}
-	return (*this);
+	(void)source;
 	// std::cout << "--ShrubberyCreationForm assignation--" << std::endl;
+	return (*this);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
@@ -64,58 +48,34 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	ShrubberyCreationForm::getName() const
+std::string const	ShrubberyCreationForm::getTarget() const
 {
-	return (_name);
-}
-
-bool	ShrubberyCreationForm::getIsSigned() const
-{
-	return (_signed);
-}
-
-int	ShrubberyCreationForm::getSignatureGrade() const
-{
-	return (_signatureGrade);
-}
-
-int	ShrubberyCreationForm::getExecutionGrade() const
-{
-	return (_executionGrade);
+	return (target);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	ShrubberyCreationForm::beSigned(Bureaucrat const& bureaucrat)
+void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	if (getIsSigned() == false)
+	try
 	{
-		if (bureaucrat.getGrade() <= getSignatureGrade())
-			_signed = true;
-		else
-			throw GradeTooLowException();
+		if (getIsSigned() == false)
+			throw (UnsignedForm());
+		if (executor.getGrade() < getExecutionGrade())
+			throw (GradeTooLowException());/////////////////////////////////////////////good?
+
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
 	}
 }
 
-void	ShrubberyCreationForm::signForm(Bureaucrat const& bureaucrat) const
-{
-	if (getIsSigned() == true)
-		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-	else
-		std::cout << bureaucrat.getName() << " couldn't sign " << getName() \
-		<< " because it needs higher bureaucrat grade to be signed." << std::endl;
-}
+//=-= Exception -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-//=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-const char* ShrubberyCreationForm::GradeTooHighException::what() const throw()
+const char*	ShrubberyCreationForm::UnsignedForm::what() const throw()
 {
-	return ("Error : Grade definition too high");
-}
-
-const char* ShrubberyCreationForm::GradeTooLowException::what() const throw()
-{
-	return ("Error : Grade definition too low");
+	return ("This form is not signed. Impossible to execute it.");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

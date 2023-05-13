@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 18:24:36 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 19:02:33 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,20 @@
 class PresidentialPardonForm : virtual public AForm
 {
 	private :
-							PresidentialPardonForm();
-		std::string const	_name;
-		bool				_signed;
-		int					_signatureGrade;
-		int					_executionGrade;
+		std::string	target;
+		PresidentialPardonForm();
 
 	public :
-		PresidentialPardonForm(std::string const name, int signatureGrade, int executionGrade);
+		PresidentialPardonForm(std::string const target);
 		PresidentialPardonForm(PresidentialPardonForm const& source);
 		PresidentialPardonForm& operator=(PresidentialPardonForm const& source);
 		~PresidentialPardonForm();
 
-		std::string	const	getName() const;
-		bool				getIsSigned() const;
-		int					getSignatureGrade() const;
-		int					getExecutionGrade() const;
+		std::string const getTarget() const;
 
-		void			beSigned(Bureaucrat const& bureaucrat);
-		void			signForm(Bureaucrat const& bureaucrat) const;
-		virtual void	execute(Bureaucrat const & executor) const = 0;
+		virtual void	execute(Bureaucrat const & executor) const;
 
-		class GradeTooHighException : public std::exception
-		{
-			public :
-				virtual const char*	what() const throw();
-		};
-
-		class GradeTooLowException : public std::exception
+		class UnsignedForm : public std::exception
 		{
 			public :
 				virtual const char*	what() const throw();
@@ -58,3 +44,6 @@ class PresidentialPardonForm : virtual public AForm
 std::ostream& operator<<(std::ostream& out, PresidentialPardonForm const& inst);
 
 #endif
+
+// PresidentialPardonForm: Required grades: sign 25, exec 5
+// Informs that <target> has been pardoned by Zaphod Beeblebrox.

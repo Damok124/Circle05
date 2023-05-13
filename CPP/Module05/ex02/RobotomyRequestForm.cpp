@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 20:48:20 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/13 19:04:44 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,21 @@
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-RobotomyRequestForm::RobotomyRequestForm() \
-: AForm()
+RobotomyRequestForm::RobotomyRequestForm()
+: AForm("Robotomy Request Form", 72, 45)
 {
-	_signed = false;
-	// std::cout << "--RobotomyRequestForm constructor--" << std::endl;
+	this->target = "[unknown]";
+	// std::cout << "--RobotomyRequestForm default constructor--" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const name, int signatureGrade, int executionGrade) \
-: AForm(name, signatureGrade, executionGrade)
+RobotomyRequestForm::RobotomyRequestForm(std::string const target)
+: AForm("Robotomy Request Form", 72, 45)
 {
-	if (signatureGrade < 1)
-		throw (GradeTooHighException());
-	else if (signatureGrade > 150)
-		throw (GradeTooLowException());
-	_signatureGrade = signatureGrade;
-	if (executionGrade < 1)
-		throw (GradeTooHighException());
-	else if (executionGrade > 150)
-		throw (GradeTooLowException());
-	_executionGrade = executionGrade;
-	_signed = false;
+	this->target = target;
 	// std::cout << "--RobotomyRequestForm param constructor--" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& source) \
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& source)
 : AForm(source.getName(), source.getSignatureGrade(), source.getExecutionGrade())
 {
 	// std::cout << "--RobotomyRequestForm copy--" << std::endl;
@@ -46,14 +36,9 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const& source) \
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(RobotomyRequestForm const& source)
 {
-	if (this != &source)
-	{
-		_signatureGrade = source.getSignatureGrade();
-		_executionGrade = source.getExecutionGrade();
-		_signed = source.getIsSigned();
-	}
-	return (*this);
+	(void)source;
 	// std::cout << "--RobotomyRequestForm assignation--" << std::endl;
+	return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm()
@@ -63,58 +48,23 @@ RobotomyRequestForm::~RobotomyRequestForm()
 
 //=-= Accessors  functions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-std::string const	RobotomyRequestForm::getName() const
+std::string const	RobotomyRequestForm::getTarget() const
 {
-	return (_name);
-}
-
-bool	RobotomyRequestForm::getIsSigned() const
-{
-	return (_signed);
-}
-
-int	RobotomyRequestForm::getSignatureGrade() const
-{
-	return (_signatureGrade);
-}
-
-int	RobotomyRequestForm::getExecutionGrade() const
-{
-	return (_executionGrade);
+	return (target);
 }
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	RobotomyRequestForm::beSigned(Bureaucrat const& bureaucrat)
+void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	if (getIsSigned() == false)
-	{
-		if (bureaucrat.getGrade() <= getSignatureGrade())
-			_signed = true;
-		else
-			throw GradeTooLowException();
-	}
+	(void)executor;
 }
 
-void	RobotomyRequestForm::signForm(Bureaucrat const& bureaucrat) const
-{
-	if (getIsSigned() == true)
-		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-	else
-		std::cout << bureaucrat.getName() << " couldn't sign " << getName() \
-		<< " because it needs higher bureaucrat grade to be signed." << std::endl;
-}
+//=-= Exception -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-//=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
-const char* RobotomyRequestForm::GradeTooHighException::what() const throw()
+const char*	RobotomyRequestForm::UnsignedForm::what() const throw()
 {
-	return ("Error : Grade definition too high");
-}
-
-const char* RobotomyRequestForm::GradeTooLowException::what() const throw()
-{
-	return ("Error : Grade definition too low");
+	return ("This form is not signed. Impossible to execute it.");
 }
 
 //=-= Stream =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
