@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/13 19:05:11 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:56:04 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <iostream>
 # include <stdexcept>
 # include <fstream>
+# include <ios>
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
 
@@ -33,7 +34,7 @@ class ShrubberyCreationForm : virtual public AForm
 
 		std::string const getTarget() const;
 
-		virtual void	execute(Bureaucrat const & executor) const;
+		virtual bool	execute(Bureaucrat const & executor) const;
 
 		class UnsignedForm : public std::exception
 		{

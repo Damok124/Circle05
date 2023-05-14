@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/13 19:02:33 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:55:50 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class PresidentialPardonForm : virtual public AForm
 
 		std::string const getTarget() const;
 
-		virtual void	execute(Bureaucrat const & executor) const;
+		virtual bool	execute(Bureaucrat const & executor) const;
 
 		class UnsignedForm : public std::exception
 		{

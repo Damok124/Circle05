@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/13 14:47:23 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 15:19:37 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <iostream>
 # include <stdexcept>
 # include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class AForm
 {
@@ -39,7 +41,7 @@ class AForm
 
 		void			beSigned(Bureaucrat const& bureaucrat);
 		void			signForm(Bureaucrat const& bureaucrat) const;
-		virtual void	execute(Bureaucrat const & executor) const = 0;
+		virtual bool	execute(Bureaucrat const & executor) const = 0;
 
 		class GradeTooHighException : public std::exception
 		{

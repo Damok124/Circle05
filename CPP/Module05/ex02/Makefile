@@ -6,7 +6,7 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/05/12 18:23:49 by zharzi           ###   ########.fr        #
+#    Updated: 2023/05/14 17:19:40 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,9 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
+
+shremove :
+	@rm *_shrubbery
 
 re : fclean all
 

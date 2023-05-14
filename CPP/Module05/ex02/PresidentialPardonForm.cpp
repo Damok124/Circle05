@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/13 19:04:55 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 20:39:35 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,22 @@ std::string const	PresidentialPardonForm::getTarget() const
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
+bool	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	(void)executor;
+	try
+	{
+		if (getIsSigned() == false)
+			throw (UnsignedForm());
+		if (executor.getGrade() > getExecutionGrade())
+			throw (GradeTooLowException());
+		std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+		return (true);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	return (false);
 }
 
 //=-= Exception -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

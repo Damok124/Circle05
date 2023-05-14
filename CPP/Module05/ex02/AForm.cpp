@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 17:53:22 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 20:38:47 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,9 @@ _signatureGrade(source.getSignatureGrade()), _executionGrade(source.getExecution
 
 AForm& AForm::operator=(AForm const& source)
 {
-	if (this != &source)
-	{
-		_signatureGrade = source.getSignatureGrade();
-		_executionGrade = source.getExecutionGrade();
-		_signed = source.getIsSigned();
-	}
-	return (*this);
+	(void)source;
 	// std::cout << "--AForm assignation--" << std::endl;
+	return (*this);
 }
 
 AForm::~AForm()

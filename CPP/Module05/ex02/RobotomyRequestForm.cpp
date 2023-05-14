@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/13 19:04:44 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 20:39:24 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,28 @@ std::string const	RobotomyRequestForm::getTarget() const
 
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
+bool	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	(void)executor;
+	static int attemptNb;
+	try
+	{
+		if (getIsSigned() == false)
+			throw (UnsignedForm());
+		if (executor.getGrade() > getExecutionGrade())
+			throw (GradeTooLowException());
+		std::cout << "* BzzZZRRRRRRRrrrwiiiiiii *";
+		if (attemptNb % 2 == 0)
+			std::cout << getTarget() << " has been robotomized." << std::endl;
+		else
+			std::cout << "Robotomy failed." << std::endl;
+		attemptNb += 1;
+		return (true);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	return (false);
 }
 
 //=-= Exception -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
