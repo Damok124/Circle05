@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/14 20:57:19 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/15 19:20:03 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ void test9()
 			std::cout << e.what() << std::endl;
 			std::cout << "test9 : exception catched - OK" << std::endl;
 		}
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 78; i++)
 			noob.upGrade();
 		try
 		{
@@ -306,8 +306,10 @@ void test9()
 			std::cout << "test9 : exception catched - KO" << std::endl;
 		}
 		noob.executeForm(robot);
-		for (int i = 0; i < 8; i++)
+		for (int i = 0; i < 27; i++)
 			noob.upGrade();
+		noob.executeForm(robot);
+		noob.executeForm(robot);
 		noob.executeForm(robot);
 		std::cout << "test9.4 / 4 - OK" << std::endl;
 	}
@@ -444,6 +446,8 @@ void test12()
 		for (int i = 0; i < 8; i++)
 			rookie.upGrade();
 		rookie.executeForm(robot);
+		rookie.executeForm(robot);
+		rookie.executeForm(robot);
 		std::cout << "test12.4 / 4 - OK" << std::endl;
 	}
 	catch (std::exception& e)
@@ -579,6 +583,8 @@ void test15()
 		for (int i = 0; i < 8; i++)
 			viceBoss.upGrade();
 		viceBoss.executeForm(robot);
+		viceBoss.executeForm(robot);
+		viceBoss.executeForm(robot);
 		std::cout << "test15.4 / 4 - OK" << std::endl;
 	}
 	catch (std::exception& e)
@@ -713,6 +719,8 @@ void test18()
 		boss.executeForm(robot);
 		for (int i = 0; i < 8; i++)
 			boss.upGrade();
+		boss.executeForm(robot);
+		boss.executeForm(robot);
 		boss.executeForm(robot);
 		std::cout << "test18.4 / 4 - OK" << std::endl;
 	}
