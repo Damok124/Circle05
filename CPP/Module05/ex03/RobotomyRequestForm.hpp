@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:31 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:55:59 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHRUBBERYCREATIONFORM_HPP
-# define SHRUBBERYCREATIONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
 # include <iostream>
 # include <stdexcept>
-# include <fstream>
-# include <ios>
 # include "Bureaucrat.hpp"
 # include "AForm.hpp"
 
-class ShrubberyCreationForm : virtual public AForm
+class RobotomyRequestForm : virtual public AForm
 {
 	private :
 		std::string	target;
-		ShrubberyCreationForm();
+		RobotomyRequestForm();
 
 	public :
-		ShrubberyCreationForm(std::string const target);
-		ShrubberyCreationForm(ShrubberyCreationForm const& source);
-		ShrubberyCreationForm& operator=(ShrubberyCreationForm const& source);
-		~ShrubberyCreationForm();
+		RobotomyRequestForm(std::string const target);
+		RobotomyRequestForm(RobotomyRequestForm const& source);
+		RobotomyRequestForm& operator=(RobotomyRequestForm const& source);
+		~RobotomyRequestForm();
 
 		std::string const getTarget() const;
 
@@ -41,12 +39,12 @@ class ShrubberyCreationForm : virtual public AForm
 			public :
 				virtual const char*	what() const throw();
 		};
-
 };
 
-std::ostream& operator<<(std::ostream& out, ShrubberyCreationForm const& inst);
+std::ostream& operator<<(std::ostream& out, RobotomyRequestForm const& inst);
 
 #endif
 
-// Create a file <target>_shrubbery in the working directory, and writes ASCII trees
-// inside it.
+// RobotomyRequestForm: Required grades: sign 72, exec 45
+// Makes some drilling noises. Then, informs that <target> has been robotomized
+// successfully 50% of the time. Otherwise, informs that the robotomy failed.

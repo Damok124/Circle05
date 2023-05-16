@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:49:03 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/16 19:54:46 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,8 @@ bool	ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		std::ofstream file(filename.c_str());
 		if (!file.is_open())
 			throw (std::ios_base::failure("File creation " + filename + "failed"));
-		else
-		{
-			printTrees(file);
-			return (true);
-		}
+		printTrees(file);
+		return (true);
 	}
 	catch (std::exception& e)
 	{

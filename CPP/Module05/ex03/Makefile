@@ -6,13 +6,19 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/05/06 07:31:15 by zharzi           ###   ########.fr        #
+#    Updated: 2023/05/16 19:26:59 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
 SRCS = \
+AForm.cpp \
+ShrubberyCreationForm.cpp \
+RobotomyRequestForm.cpp \
+PresidentialPardonForm.cpp \
+Bureaucrat.cpp \
+Intern.cpp \
 main.cpp
 
 OBJ = $(SRCS:.cpp=.o)
@@ -34,6 +40,9 @@ clean :
 
 fclean : clean
 	@rm -f $(NAME)
+
+shremove :
+	@rm *_shrubbery
 
 re : fclean all
 

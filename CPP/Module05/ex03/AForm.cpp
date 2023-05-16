@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:51:32 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/16 20:00:52 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ AForm::AForm(std::string const name, int signatureGrade, int executionGrade) : _
 {
 	if (signatureGrade < 1)
 		throw (GradeTooHighException());
-	else if (signatureGrade > 150)
+	if (signatureGrade > 150)
 		throw (GradeTooLowException());
 	_signatureGrade = signatureGrade;
 	if (executionGrade < 1)
 		throw (GradeTooHighException());
-	else if (executionGrade > 150)
+	if (executionGrade > 150)
 		throw (GradeTooLowException());
 	_executionGrade = executionGrade;
 	_signed = false;
@@ -80,22 +80,25 @@ int	AForm::getExecutionGrade() const
 
 void	AForm::beSigned(Bureaucrat const& bureaucrat)
 {
-	if (getIsSigned() == false)
-	{
-		if (bureaucrat.getGrade() <= getSignatureGrade())
-			_signed = true;
-		else
-			throw (Bureaucrat::GradeTooLowException(bureaucrat.getName()));
-	}
+	if (getIsSigned() == true)
+		return ;
+	if (bureaucrat.getGrade() > getSignatureGrade())
+		throw (Bureaucrat::GradeTooLowException(bureaucrat.getName()));
+	_signed = true;
 }
 
 void	AForm::signForm(Bureaucrat const& bureaucrat) const
 {
-	if (getIsSigned() == true)
-		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-	else
-		std::cout << bureaucrat.getName() << " couldn't sign " << getName() \
-		<< " because it needs higher bureaucrat grade to be signed." << std::endl;
+	switch (getIsSigned())
+	{
+		case true :
+			std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
+			break ;
+		case false :
+			std::cout << bureaucrat.getName() << " couldn't sign " << getName()
+			<< " because it needs higher bureaucrat grade to be signed." << std::endl;
+			break ;
+	}
 }
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

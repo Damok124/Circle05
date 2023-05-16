@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:49:10 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/16 20:03:16 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,36 @@ std::string const	RobotomyRequestForm::getTarget() const
 	return (target);
 }
 
+
+//=-= Functions  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+static void	robotomy(std::string const target)
+{
+	static int attemptNb;
+	std::cout << "* BzzZZRRRRRRRrrrwiiiiiii *" << std::endl;
+	switch (attemptNb % 2)
+	{
+		case 0 :
+			std::cout << target << " has been robotomized." << std::endl;
+			break ;
+		case 1 :
+			std::cout << "Robotomy failed." << std::endl;
+			break ;
+	}
+	attemptNb += 1;
+}
+
 //=-= Methods  =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 bool	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	static int attemptNb;
 	try
 	{
 		if (getIsSigned() == false)
 			throw (UnsignedForm());
 		if (executor.getGrade() > getExecutionGrade())
 			throw (Bureaucrat::GradeTooLowException(executor.getName()));
-		std::cout << "* BzzZZRRRRRRRrrrwiiiiiii *" << std::endl;
-		if (attemptNb % 2 == 0)
-			std::cout << getTarget() << " has been robotomized." << std::endl;
-		else
-			std::cout << "Robotomy failed." << std::endl;
-		attemptNb += 1;
+		robotomy(getTarget());
 		return (true);
 	}
 	catch (std::exception& e)

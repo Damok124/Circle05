@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 18:10:34 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/16 19:45:50 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name)
 {
 	if (grade < 1)
 		throw (GradeTooHighException(getName()));
-	else if (grade > 150)
+	if (grade > 150)
 		throw (GradeTooLowException(getName()));
 	this->grade = grade;
 	// std::cout << "--Bureaucrat param constructor--" << std::endl;
