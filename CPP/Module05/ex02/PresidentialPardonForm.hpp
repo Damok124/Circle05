@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/14 14:55:50 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/17 14:44:17 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,3 @@ class PresidentialPardonForm : virtual public AForm
 std::ostream& operator<<(std::ostream& out, PresidentialPardonForm const& inst);
 
 #endif
-
-// PresidentialPardonForm: Required grades: sign 25, exec 5
-// Informs that <target> has been pardoned by Zaphod Beeblebrox.

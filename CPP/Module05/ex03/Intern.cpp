@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 21:09:48 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/17 12:45:54 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,23 @@ Intern::~Intern()
 
 AForm* Intern::makeForm(std::string const formName, std::string const target)
 {
-	std::string tab[3] = {"PresidentialPardonForm.hpp", "RobotomyRequestForm.hpp", "ShrubberyCreationForm.hpp"};
-	AForm* ptr = NULL;
-	for (int i = 0; i < 3; i++)
+	std::string tab[3] = {"Shrubbery Creation Form", "Robotomy Request Form", "Presidential Pardon Form"};
+	int i = 0;
+	while (i < 3 && formName.compare(tab[i]))
+		i++;
+	switch (i)
 	{
-		if (formName.compare(tab[i]))
-	}
-	switch (checkFormName(formName))
-	{
-		case (1) :
+		case (0) :
 			std::cout << "Intern creates " << formName << std::endl;
-			ptr = new ShrubberyCreationForm::ShrubberyCreationForm();
-			break ;
-		case (2):
+			return (new ShrubberyCreationForm(target));
+		case (1):
 			std::cout << "Intern creates " << formName << std::endl;
-			ptr = new RobotomyRequestForm::RobotomyRequestForm();
-			break ;
-		case (3) :
+			return (new RobotomyRequestForm(target));
+		case (2) :
 			std::cout << "Intern creates " << formName << std::endl;
-			ptr = new PresidentialPardonForm::PresidentialPardonForm();
-			break ;
+			return (new PresidentialPardonForm(target));
 		default :
-			std::cout << "Intern doesn't know such form" << std::endl;
-			break ;
+			std::cout << "Intern doesn't know such form named " << formName << std::endl;
 	}
-	// (void)formName;
-	// (void)target;
-	return ptr;
-	//Elle affiche quelque chose comme :Intern creates <form>
-	// Si le nom du formulaire passé en paramètre n’existe pas,
-	// affichez un message d’erreur explicite.
+	return NULL;
 }

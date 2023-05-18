@@ -6,16 +6,16 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 20:19:48 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/17 12:43:32 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Bureaucrat.hpp"
-#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 void	test1()
 {
@@ -348,22 +348,123 @@ void testForms()
 
 void test11()
 {
-
+	try
+	{
+		Intern one = Intern();
+		std::cout << "test11.1 / 3 - OK" << std::endl;
+		Intern two(one);
+		std::cout << "test11.2 / 3 - OK" << std::endl;
+		Intern three;
+		three = two;
+		std::cout << "test11.3 / 3 - OK" << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test11 : exception catched - KO" << std::endl;
+	}
 }
 
 void test12()
 {
-
+	try
+	{
+		Intern one;
+		AForm* form = one.makeForm("Presidential Pardon Form", "The code reviewer");
+		Bureaucrat boss("Boss", 1);
+		if (form)
+		{
+			std::cout << *form << std::endl;
+			boss.executeForm(*form);
+			delete form;
+			std::cout << "test12.1 / 4 - OK" << std::endl;
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test12.1 : exception catched - KO" << std::endl;
+	}
+	try
+	{
+		Intern one;
+		AForm* form = one.makeForm("Presidential Pardon Form", "The code reviewer");
+		Bureaucrat boss("Boss", 1);
+		if (form)
+		{
+			form->beSigned(boss);
+			std::cout << *form << std::endl;
+			boss.executeForm(*form);
+			delete form;
+		}
+		std::cout << "test12.2 / 4 - OK" << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test12.2 : exception catched - KO" << std::endl;
+	}
+	try
+	{
+		Intern one;
+		AForm* form = one.makeForm("Robotomy Request Form", "The code reviewer");
+		Bureaucrat boss("Boss", 1);
+		if (form)
+		{
+			form->beSigned(boss);
+			std::cout << *form << std::endl;
+			boss.executeForm(*form);
+			delete form;
+		}
+		std::cout << "test12.3 / 4 - OK" << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test12.3 : exception catched - KO" << std::endl;
+	}
+	try
+	{
+		Intern one;
+		AForm* form = one.makeForm("Shrubbery Creation Form", "home");
+		Bureaucrat boss("Boss", 1);
+		if (form)
+		{
+			form->beSigned(boss);
+			std::cout << *form << std::endl;
+			boss.executeForm(*form);
+			delete form;
+		}
+		std::cout << "test12.4 / 4 - OK" << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test12.4 : exception catched - KO" << std::endl;
+	}
 }
 
 void test13()
 {
-
-}
-
-void test14()
-{
-
+	try
+	{
+		Intern one;
+		AForm* form = one.makeForm("Shrubbery", "Failure");
+		Bureaucrat boss("Boss", 1);
+		if (form)
+		{
+			form->beSigned(boss);
+			std::cout << *form << std::endl;
+			boss.executeForm(*form);
+			delete form;
+		}
+		std::cout << "test12.4 / 4 - OK" << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+		std::cout << "test12.4 : exception catched - KO" << std::endl;
+	}
 }
 
 void testIntern()
@@ -377,18 +478,15 @@ void testIntern()
 	std::cout << "====================================" << std::endl;
 	std::cout << "TEST 13 :\n" << std::endl;
 	test13();
-	std::cout << "====================================" << std::endl;
-	std::cout << "TEST 14 :\n" << std::endl;
-	test14();
 }
 
 
 int	main(void)
 {
-	// testBureaucrat();
-	// std::cout << "====================================" << std::endl;
-	// testForms();
-	// std::cout << "====================================" << std::endl;
+	testBureaucrat();
+	std::cout << "====================================" << std::endl;
+	testForms();
+	std::cout << "====================================" << std::endl;
 	testIntern();
 	return (0);
 }

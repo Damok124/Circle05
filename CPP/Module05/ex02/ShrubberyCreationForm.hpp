@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:12:31 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/17 14:45:21 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,3 @@ class ShrubberyCreationForm : virtual public AForm
 std::ostream& operator<<(std::ostream& out, ShrubberyCreationForm const& inst);
 
 #endif
-
-// Create a file <target>_shrubbery in the working directory, and writes ASCII trees
-// inside it.

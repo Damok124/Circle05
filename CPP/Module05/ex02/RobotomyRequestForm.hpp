@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/14 14:55:59 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/17 14:44:33 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,3 @@ class RobotomyRequestForm : virtual public AForm
 std::ostream& operator<<(std::ostream& out, RobotomyRequestForm const& inst);
 
 #endif
-
-// RobotomyRequestForm: Required grades: sign 72, exec 45
-// Makes some drilling noises. Then, informs that <target> has been robotomized
-// successfully 50% of the time. Otherwise, informs that the robotomy failed.
