@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 17:47:41 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 09:03:14 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 # include <stdexcept>
 # include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form
 {
 	private :
 							Form();
 		std::string const	_name;
 		bool				_signed;
-		int					_signatureGrade;
-		int					_executionGrade;
+		int const			_signatureGrade;
+		int const			_executionGrade;
 
 	public :
 		Form(std::string const name, int signatureGrade, int executionGrade);
@@ -38,7 +40,6 @@ class Form
 		int					getExecutionGrade() const;
 
 		void	beSigned(Bureaucrat const& bureaucrat);
-		void	signForm(Bureaucrat const& bureaucrat) const;
 
 		class GradeTooHighException : public std::exception
 		{

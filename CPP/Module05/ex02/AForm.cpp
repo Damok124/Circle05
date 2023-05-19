@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:51:32 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 13:43:42 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 
 //=-= Coplian form and special constructor =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
-AForm::AForm()
+AForm::AForm() : _signatureGrade(1), _executionGrade(1)
 {
 	_signed = false;
 	// std::cout << "--AForm constructor--" << std::endl;
 }
 
-AForm::AForm(std::string const name, int signatureGrade, int executionGrade) : _name(name)
+AForm::AForm(std::string const name, int signatureGrade, int executionGrade)
+: _name(name), _signatureGrade(signatureGrade), _executionGrade(executionGrade)
 {
-	if (signatureGrade < 1)
+	if (signatureGrade < 1 || executionGrade < 1)
 		throw (GradeTooHighException());
-	else if (signatureGrade > 150)
+	else if (signatureGrade > 150 || executionGrade > 150)
 		throw (GradeTooLowException());
-	_signatureGrade = signatureGrade;
-	if (executionGrade < 1)
-		throw (GradeTooHighException());
-	else if (executionGrade > 150)
-		throw (GradeTooLowException());
-	_executionGrade = executionGrade;
 	_signed = false;
 	// std::cout << "--AForm param constructor--" << std::endl;
 }
@@ -87,15 +82,6 @@ void	AForm::beSigned(Bureaucrat const& bureaucrat)
 		else
 			throw (Bureaucrat::GradeTooLowException(bureaucrat.getName()));
 	}
-}
-
-void	AForm::signForm(Bureaucrat const& bureaucrat) const
-{
-	if (getIsSigned() == true)
-		std::cout << bureaucrat.getName() << " signed " << getName() << std::endl;
-	else
-		std::cout << bureaucrat.getName() << " couldn't sign " << getName() \
-		<< " because it needs higher bureaucrat grade to be signed." << std::endl;
 }
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/17 11:52:55 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 17:08:42 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,20 @@ void	Bureaucrat::downGrade()
 	grade += 1;
 }
 
+void	Bureaucrat::signForm(AForm& form) const
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << getName() << " couldn't sign " << form.getName()
+		<< " because his grade is to low." << std::endl;
+	}
+}
+
 bool	Bureaucrat::executeForm(AForm const & form) const
 {
 	if (form.execute(*this))
@@ -103,13 +117,13 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 Bureaucrat::GradeTooHighException::GradeTooHighException(std::string const& name) throw()
 {
 	// std::cout << "GradeTooHighException constructor" << std::endl;
-	message = name + "'s grade is too high to upgrade";
+	message = name + "'s grade is too high";
 }
 
 Bureaucrat::GradeTooLowException::GradeTooLowException(std::string const& name) throw()
 {
 	// std::cout << "GradeTooLowException constructor" << std::endl;
-	message = name + "'s grade is too low to downgrade";
+	message = name + "'s grade is too low";
 }
 
 Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()

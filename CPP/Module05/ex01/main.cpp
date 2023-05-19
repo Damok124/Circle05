@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 15:08:10 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 08:46:59 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,23 +231,12 @@ void test10()
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
 		Bureaucrat noob("Noob", 150);
-		try
-		{
-			f3.beSigned(noob);
-			f3.signForm(noob);
-			std::cout << "test10.1 / 3 - KO" << std::endl;
-			f2.beSigned(noob);
-			f2.signForm(noob);
-			std::cout << "test10.2 / 3 - KO" << std::endl;
-			f1.beSigned(noob);
-			f1.signForm(noob);
-			std::cout << "test10.3 / 3 - KO" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test10 : exception catched - OK" << std::endl;
-		}
+		noob.signForm(f3);
+		std::cout << "test10.1 / 3 - OK" << std::endl;
+		noob.signForm(f2);
+		std::cout << "test10.2 / 3 - OK" << std::endl;
+		noob.signForm(f1);
+		std::cout << "test10.3 / 3 - OK" << std::endl;
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
@@ -270,23 +259,12 @@ void test11()
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
 		Bureaucrat rookie("Rookie", 23);
-		try
-		{
-			f3.beSigned(rookie);
-			f3.signForm(rookie);
-			std::cout << "test11.1 / 3 - OK" << std::endl;
-			f2.beSigned(rookie);
-			f2.signForm(rookie);
-			std::cout << "test11.2 / 3 - OK" << std::endl;
-			f1.beSigned(rookie);
-			f1.signForm(rookie);
-			std::cout << "test11.3 / 3 - KO" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test11 : exception catched - OK" << std::endl;
-		}
+		rookie.signForm(f3);
+		std::cout << "test11.1 / 3 - OK" << std::endl;
+		rookie.signForm(f2);
+		std::cout << "test11.2 / 3 - OK" << std::endl;
+		rookie.signForm(f1);
+		std::cout << "test11.3 / 3 - OK" << std::endl;
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
@@ -309,23 +287,12 @@ void test12()
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
 		Bureaucrat viceBoss("Vice-Boss", 2);
-		try
-		{
-			f3.beSigned(viceBoss);
-			f3.signForm(viceBoss);
-			std::cout << "test12.1 / 3 - OK" << std::endl;
-			f2.beSigned(viceBoss);
-			f2.signForm(viceBoss);
-			std::cout << "test12.2 / 3 - OK" << std::endl;
-			f1.beSigned(viceBoss);
-			f1.signForm(viceBoss);
-			std::cout << "test12.3 / 3 - OK" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test12 : exception catched - KO" << std::endl;
-		}
+		viceBoss.signForm(f3);
+		std::cout << "test12.1 / 3 - OK" << std::endl;
+		viceBoss.signForm(f2);
+		std::cout << "test12.2 / 3 - OK" << std::endl;
+		viceBoss.signForm(f1);
+		std::cout << "test12.3 / 3 - OK" << std::endl;
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
@@ -348,23 +315,12 @@ void test13()
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;
 		Bureaucrat boss("Boss", 1);
-		try
-		{
-			f3.beSigned(boss);
-			f3.signForm(boss);
-			std::cout << "test13.1 / 3 - OK" << std::endl;
-			f2.beSigned(boss);
-			f2.signForm(boss);
-			std::cout << "test13.2 / 3 - OK" << std::endl;
-			f1.beSigned(boss);
-			f1.signForm(boss);
-			std::cout << "test13.3 / 3 - OK" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test13 : exception catched - KO" << std::endl;
-		}
+		boss.signForm(f3);
+		std::cout << "test13.1 / 3 - OK" << std::endl;
+		boss.signForm(f2);
+		std::cout << "test13.2 / 3 - OK" << std::endl;
+		boss.signForm(f1);
+		std::cout << "test13.3 / 3 - OK" << std::endl;
 		std::cout << f1 << std::endl;
 		std::cout << f2 << std::endl;
 		std::cout << f3 << std::endl;

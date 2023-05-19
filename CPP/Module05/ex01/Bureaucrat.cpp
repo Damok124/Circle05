@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/12 07:59:58 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 08:38:44 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,20 @@ void	Bureaucrat::downGrade()
 	if (grade == 150)
 		throw (GradeTooLowException(this->getName()));
 	grade += 1;
+}
+
+void	Bureaucrat::signForm(Form& form) const
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << getName() << " signed " << form.getName() << std::endl;
+	}
+	catch (...)
+	{
+		std::cout << getName() << " couldn't sign " << form.getName()
+		<< " because his grade is to low." << std::endl;
+	}
 }
 
 //=-= Exceptions =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

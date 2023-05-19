@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 18:10:50 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 08:40:53 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ class Bureaucrat
 		void	upGrade();
 		void	downGrade();
 
+		void	signForm(AForm& form) const;
 		bool	executeForm(AForm const & form) const;
 
 		class GradeTooHighException : public std::exception

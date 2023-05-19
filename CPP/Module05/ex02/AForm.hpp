@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:22:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 17:02:23 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 09:19:37 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ class AForm
 	private :
 		std::string const	_name;
 		bool				_signed;
-		int					_signatureGrade;
-		int					_executionGrade;
+		int const			_signatureGrade;
+		int const			_executionGrade;
 
 	public :
 				AForm();
@@ -40,7 +40,6 @@ class AForm
 		int					getExecutionGrade() const;
 
 		void			beSigned(Bureaucrat const& bureaucrat);
-		void			signForm(Bureaucrat const& bureaucrat) const;
 		virtual bool	execute(Bureaucrat const & executor) const = 0;
 
 		class GradeTooHighException : public std::exception

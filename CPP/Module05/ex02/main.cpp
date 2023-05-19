@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 07:31:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/16 20:19:13 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/19 15:10:49 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,28 +202,12 @@ void test8()
 		ShrubberyCreationForm shrub("Sahara");
 		noob.executeForm(shrub);
 		std::cout << "test8.1 - OK" << std::endl;
-		try
-		{
-			shrub.beSigned(noob);
-			std::cout << "test8.2 - KO" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test8.2 : exception catched - OK" << std::endl;
-		}
+		noob.signForm(shrub);
+		std::cout << "test8.2 - OK" << std::endl;
 		for (int i = 0; i < 5; i++)
 			noob.upGrade();
-		try
-		{
-			shrub.beSigned(noob);
-			std::cout << "test8.3 - OK" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test8.3 : exception catched - KO" << std::endl;
-		}
+		noob.signForm(shrub);
+		std::cout << "test8.3 - OK" << std::endl;
 		noob.executeForm(shrub);
 		for (int i = 0; i < 8; i++)
 			noob.upGrade();
@@ -247,28 +231,12 @@ void test9()
 		RobotomyRequestForm robot("T-800");
 		rookie.executeForm(robot);
 		std::cout << "test9.1 - OK" << std::endl;
-		try
-		{
-			robot.beSigned(rookie);
-			std::cout << "test9.2 - KO" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test9.2 : exception catched - OK" << std::endl;
-		}
+		rookie.signForm(robot);
+		std::cout << "test9.2 - OK" << std::endl;
 		for (int i = 0; i < 78; i++)
 			rookie.upGrade();
-		try
-		{
-			robot.beSigned(rookie);
-			std::cout << "test9.3 - OK" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test9.3 : exception catched - KO" << std::endl;
-		}
+		rookie.signForm(robot);
+		std::cout << "test9.3 - OK" << std::endl;
 		rookie.executeForm(robot);
 		for (int i = 0; i < 27; i++)
 			rookie.upGrade();
@@ -292,28 +260,12 @@ void test10()
 		PresidentialPardonForm president("Monkey D. Luffy");
 		futureBoss.executeForm(president);
 		std::cout << "test10.1 - OK" << std::endl;
-		try
-		{
-			president.beSigned(futureBoss);
-			std::cout << "test10.2 - KO" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test10.2 : exception catched - OK" << std::endl;
-		}
+		futureBoss.signForm(president);
+		std::cout << "test10.2 - OK" << std::endl;
 		for (int i = 0; i < 125; i++)
 			futureBoss.upGrade();
-		try
-		{
-			president.beSigned(futureBoss);
-			std::cout << "test10.3 - OK" << std::endl;
-		}
-		catch (std::exception& e)
-		{
-			std::cout << e.what() << std::endl;
-			std::cout << "test10.3 : exception catched - KO" << std::endl;
-		}
+		futureBoss.signForm(president);
+		std::cout << "test10.3 - OK" << std::endl;
 		futureBoss.executeForm(president);
 		for (int i = 0; i < 20; i++)
 			futureBoss.upGrade();
