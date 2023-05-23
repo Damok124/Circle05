@@ -6,13 +6,14 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/05/19 23:03:30 by zharzi           ###   ########.fr        #
+#    Updated: 2023/05/23 18:31:51 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = convert
 
 SRCS = \
+ScalarConverter.cpp \
 main.cpp
 
 OBJ = $(SRCS:.cpp=.o)
