@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:04:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/23 21:53:05 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/24 21:08:11 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 
 int main(int ac, char** argv)
 {
-	if (ac == 2)
+	std::string str;
+	try
 	{
-		char	c;
-		int		i;
-		float	f;
-		double	d;
-		i = str.atoi(argv[1])
+		if (ac != 2)
+			throw (ScalarConverter::ConverterException("wrong number of arguments"));
+		str = argv[1];
+		if (str.empty())
+			throw (ScalarConverter::ConverterException("your argument is an empty string"));
+		ScalarConverter::convert(str);
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Error : " << e.what() << std::endl;
 	}
 	return (0);
 }
