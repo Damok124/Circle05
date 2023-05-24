@@ -6,11 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:09:24 by zharzi            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 21:53:02 by zharzi           ###   ########.fr       */
-=======
-/*   Updated: 2023/05/22 11:36:31 by zharzi           ###   ########.fr       */
->>>>>>> 7f7462bdfb4785796c7013c000f4693a7feb4a5b
+/*   Updated: 2023/05/24 10:37:46 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +22,22 @@ class ScalarConverter
 		ScalarConverter(ScalarConverter const& source);
 		ScalarConverter& operator=(ScalarConverter const& source);
 
-	public :
-		virtual	~ScalarConverter();//au cas ou besoin d'un dynamic cast
+		static std::string const	_input;
 
-		void	convert(char const* literal);
+	public :
+		virtual			~ScalarConverter();
+
+		static void		convert(std::string const literal);
+
+		static bool		isChar(std::string const input);
+		static bool		isInt(std::string const input);
+		static bool		isFloat(std::string const input);
+		static bool		isDouble(std::string const input);
+
+		static char		toChar(std::string const input);
+		static int		toInt(std::string const input);
+		static float	toFloat(std::string const input);
+		static double	toDouble(std::string const input);
 };
 
 #endif

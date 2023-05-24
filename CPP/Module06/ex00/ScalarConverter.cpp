@@ -6,22 +6,53 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:10:57 by zharzi            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/23 21:53:03 by zharzi           ###   ########.fr       */
-=======
-/*   Updated: 2023/05/22 11:36:29 by zharzi           ###   ########.fr       */
->>>>>>> 7f7462bdfb4785796c7013c000f4693a7feb4a5b
+/*   Updated: 2023/05/24 10:37:43 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-<<<<<<< HEAD
 void	ScalarConverter::convert(std::string const literal)
 {
 	(void)literal;
 }
-=======
-// Allowed functions : Any function to convert from a string to an int,
-// a float or a double. This will help, but won’t do the whole job.s
->>>>>>> 7f7462bdfb4785796c7013c000f4693a7feb4a5b
+
+bool	isChar(std::string const input)
+{
+	return (0);
+}
+
+bool	isInt(std::string const input)
+{
+	return (0);
+}
+
+bool	isFloat(std::string const input)
+{
+	return (0);
+}
+
+bool	isDouble(std::string const input)
+{
+	return (0);
+}
+
+char	toChar(std::string const input)
+{
+
+}
+
+int	toInt(std::string const input)
+{
+
+}
+
+float	toFloat(std::string const input)
+{
+
+}
+
+double	toDouble(std::string const input)
+{
+
+}
