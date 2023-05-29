@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:09:24 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/24 21:08:09 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/29 22:40:26 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include <iostream>
 # include <stdexcept>
+# include <cstdlib>
+# include <climits>
 
-enum type
+enum literalType
 {
 	CHAR,
 	INT,
@@ -27,12 +29,12 @@ enum type
 
 struct s_datas
 {
-	type		type;
-	char		c;
-	int			i;
-	float		f;
-	double		d;
-}	typedef		t_datas;
+	literalType		type;
+	char			c;
+	int				i;
+	float			f;
+	double			d;
+}	typedef			t_datas;
 
 class ScalarConverter
 {
@@ -47,18 +49,18 @@ class ScalarConverter
 
 		virtual	~ScalarConverter();
 
-		static void	convert(std::string const literal);
-		static type	label(std::string const literal);
+		static void			convert(std::string const literal);
+		static literalType	label(std::string const literal);
 
-		static bool	isChar(std::string const input);
-		static bool	isInt(std::string const input);
-		static bool	isFloat(std::string const input);
-		static bool	isDouble(std::string const input);
+		static bool			isChar(std::string const input);
+		static bool			isInt(std::string const input);
+		static bool			isFloat(std::string const input);
+		static bool			isDouble(std::string const input);
 
-		static void	fromChar(char const c);
-		static void	fromInt(int const i);
-		static void	fromFloat(float const f);
-		static void	fromDouble(double const d);
+		static void			fromChar(char const c);
+		static void			fromInt(int const i);
+		static void			fromFloat(float const f);
+		static void			fromDouble(double const d);
 
 		class ConverterException : public std::exception
 		{
