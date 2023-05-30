@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:04:15 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/29 22:40:31 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/30 23:48:21 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main(int ac, char** argv)
 		if (str.empty())
 			throw (ScalarConverter::ConverterException("your argument is an empty string"));
 		ScalarConverter::convert(str);
-		//print
+		std::cout << ScalarConverter::getDatas() << std::endl;
 	}
 	catch (std::exception& e)
 	{
