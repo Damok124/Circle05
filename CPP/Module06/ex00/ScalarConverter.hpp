@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 23:09:24 by zharzi            #+#    #+#             */
-/*   Updated: 2023/05/30 23:48:19 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/05/31 15:52:53 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
-# include <sstream>
-# include <iomanip>
 # include <stdexcept>
 # include <cstdlib>
 # include <climits>
