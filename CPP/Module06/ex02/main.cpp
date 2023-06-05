@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:50:16 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/01 00:22:03 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/01 16:39:46 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,54 @@ Base * generate(void)
 	else if (i == 1)
 		return (new B());
 	return (new C());
-// Elle instancie de manière aléatoire A, B ou C et renvoie l'instance en tant que pointeur Base.
-// Vous êtes libre d'utiliser n'importe quelle méthode pour l'implémentation du choix aléatoire.
 }
 
 void identify(Base* p)
 {
-// Elle affiche le type réel de l'objet pointé par p : "A", "B" ou "C".
-	(void)p;
+	A* a = dynamic_cast<A*>(p);
+	B* b = dynamic_cast<B*>(p);
+	C* c = dynamic_cast<C*>(p);
+	if (a != NULL)
+		std::cout << "A type detected." << std::endl;
+	else if (b != NULL)
+		std::cout << "B type detected." << std::endl;
+	else if (c != NULL)
+		std::cout << "C type detected." << std::endl;
 }
 
 void identify(Base& p)
 {
-	(void)p;
-// Elle affiche le type réel de l'objet référencé par p : "A", "B" ou "C".
-// L'utilisation d'un pointeur à l'intérieur de cette fonction est interdite.
+	try
+	{
+		A& a = dynamic_cast<A&>(p);
+		std::cout << "A type detected." << std::endl;
+		return ;
+		(void)a;
+	}
+	catch(...)
+	{
+		try
+		{
+			B& b = dynamic_cast<B&>(p);
+			std::cout << "B type detected." << std::endl;
+			return ;
+			(void)b;
+		}
+		catch(...)
+		{
+			C& c = dynamic_cast<C&>(p);
+			std::cout << "C type detected." << std::endl;
+			return ;
+			(void)c;
+		}
+	}
 }
-
 
 int	main(void)
 {
+	Base* base = generate();
+	identify(base);
+	identify(*base);
+	delete base;
 	return (0);
 }
