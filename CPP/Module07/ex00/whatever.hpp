@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 16:00:54 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/05 20:42:47 by zharzi           ###   ########.fr       */
+/*   Created: 2023/06/06 09:39:04 by zharzi            #+#    #+#             */
+/*   Updated: 2023/06/06 11:06:43 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#ifndef WHATEVER_HPP
+# define WHATEVER_HPP
 
 # include <iostream>
-# include <stdint.h>
-# include "Data.hpp"
 
-class Serializer
+template <typename T>
+void swap(T& a, T& b)
 {
-	private:
-		Serializer();
-		Serializer(Serializer const& source);
-		Serializer& operator=(Serializer const& source);
-		~Serializer();
-	public:
-		static uintptr_t	serialize(Data* ptr);
-		static Data*		deserialize(uintptr_t raw);
-};
+	T c = a;
+	a = b;
+	b = c;
+}
+
+template <typename T>
+T min(T const& a, T const& b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+template<typename T>
+T max(T const& a, T const& b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
 #endif
