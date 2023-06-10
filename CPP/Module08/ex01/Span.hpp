@@ -1,36 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   easyfind.hpp                                       :+:      :+:    :+:   */
+/*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/08 19:59:52 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/10 11:36:23 by zharzi           ###   ########.fr       */
+/*   Created: 2023/06/10 13:14:35 by zharzi            #+#    #+#             */
+/*   Updated: 2023/06/10 17:27:37 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EASYFIND_HPP
-# define EASYFIND_HPP
+#ifndef SPAN_HPP
+# define SPAN_HPP
 
 # include <iostream>
+# include <stdexcept>
 # include <algorithm>
 # include <vector>
-# include <list>
-# include <deque>
+# include <cstdlib>
+# include <ctime>
 
-template<typename T>
-typename T::const_iterator	easyfind(T const& container, int value)
+class Span
 {
-	typename T::const_iterator it;
-	typename T::const_iterator ite = container.end();
+	private:
+		unsigned int		N;
+		std::vector<int>	vec;
+		Span();
 
-	for (it = container.begin(); it != ite; ++it)
-	{
-		if (*it == value)
-			return (it);
-	}
-	return (ite);
-}
+	public:
+		Span(unsigned int N);
+		Span(Span const& source);
+		Span& operator=(Span const& source);
+		~Span();
+
+		void	addNumber(int const n);
+		void	addManyNumbers(unsigned int n);
+		int		shortestSpan() const;
+		int		longestSpan() const;
+};
 
 #endif

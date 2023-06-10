@@ -6,13 +6,14 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/06/06 08:39:53 by zharzi           ###   ########.fr        #
+#    Updated: 2023/06/10 13:14:04 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = a.out
 
 SRCS = \
+Span.cpp \
 main.cpp
 
 OBJ = $(SRCS:.cpp=.o)
