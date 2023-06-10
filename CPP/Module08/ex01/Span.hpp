@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:14:35 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/10 17:27:37 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/10 21:57:37 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 class Span
 {
 	private:
-		unsigned int		N;
 		std::vector<int>	vec;
+		unsigned int		N;
 		Span();
 
 	public:
