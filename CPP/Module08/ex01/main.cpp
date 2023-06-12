@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:48:20 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/12 15:16:23 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:08:25 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,34 @@ void	test8(void)
 	std::cout << std::endl;
 }
 
+void	test9(void)
+{
+	std::cout << "Test 9 must fail:" << std::endl;
+	Span test = Span(5);
+	try
+	{
+		std::list<int> mod;
+		mod.push_back(INT_MIN);
+		mod.push_back(0);
+		mod.push_back(INT_MAX);
+		test.addRandomNumbers(4);
+		std::cout << test << std::endl;
+		std::list<int>::iterator ite = mod.end();
+		for (std::list<int>::iterator it = mod.begin(); it != ite; it++)
+			std::cout << *it << std::endl;
+		std::list<int>::iterator it = mod.begin();
+		test.pushBackRange(it, ite);
+		std::cout << test << std::endl;
+		std::cout << test.shortestSpan() << std::endl;
+		std::cout << test.longestSpan() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << std::endl;
+}
+
 int	main(void)
 {
 	test1();
@@ -219,5 +247,6 @@ int	main(void)
 	test6();
 	test7();
 	test8();
+	test9();
 	return (0);
 }

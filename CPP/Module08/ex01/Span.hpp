@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:14:35 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/12 15:10:36 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:09:11 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,15 @@ class Span
 		template<typename T>
 		void	pushBackRange(T it, T ite)
 		{
+			long unsigned int i = 0;
 			T tmp = it;
-			for (int i = 0; tmp != ite; tmp++, i++)
+			for (i = 0; tmp != ite; tmp++, i++)
 			{
 				if (i > ARBITRARY_LIMIT)
 					throw (std::out_of_range("Error : end iterator is too far or probably not on the same container."));
 			}
+			if (i > (N - vec.size()))
+				throw (std::out_of_range("Error : not enough space left in Span to add from iterators given. Aborted."));
 			vec.insert(vec.end(), it, ite);
 		}
 };
