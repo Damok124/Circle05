@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 13:15:31 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/10 17:26:57 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/12 15:12:17 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	Span::addNumber(int const n)
 		throw (std::out_of_range("Error : container full capacity reached. Cannot add any value."));
 }
 
-void	Span::addManyNumbers(unsigned int n)
+void	Span::addRandomNumbers(unsigned int n)
 {
 	if (n > 0)
 	{
@@ -59,33 +59,54 @@ void	Span::addManyNumbers(unsigned int n)
 			throw (std::out_of_range("Error : container full capacity reached. Cannot add any value."));
 		while (n)
 		{
-			vec.push_back(rand());
+			this->addNumber(rand());
 			n--;
 		}
 	}
 }
 
-int	Span::shortestSpan() const
+long int	Span::shortestSpan() const
 {
 	if (vec.size() < 2)
 		throw (std::logic_error("Error : you need at least two value to check the shortest span between."));
 	std::vector<int> copy = vec;
 	std::sort(copy.begin(), copy.end());
-	int span = std::abs(*(copy.begin() + 1) - *copy.begin());
+	long int span = std::abs(static_cast<long int>(*(copy.begin() + 1)) - static_cast<long int>(*copy.begin()));
 	for (std::vector<int>::const_iterator it = copy.begin(); (it + 1) != copy.end(); it++)
 	{
-		if (std::abs(*(it + 1) - *it) < span)
+		if (std::abs(static_cast<long int>(*(it + 1)) - static_cast<long int>(*it)) < span)
 			span = std::abs(*(it + 1) - *it);
 	}
 	return (span);
 }
 
-int	Span::longestSpan() const
+long int	Span::longestSpan() const
 {
 	if (vec.size() < 2)
 		throw (std::logic_error("Error : you need at least two value to check the longest span between."));
 	std::vector<int> copy = vec;
 	std::sort(copy.begin(), copy.end());
-	return (*(copy.end() - 1) - *copy.begin());
+	return (static_cast<long int>(*(copy.end() - 1)) - static_cast<long int>(*copy.begin()));
 }
 
+std::vector<int>::iterator	Span::getBegin(void)
+{
+	return vec.begin();
+}
+
+std::vector<int>::iterator	Span::getEnd(void)
+{
+	return vec.end();
+}
+
+std::ostream& operator<<(std::ostream& out, Span& source)
+{
+	std::vector<int>::iterator ite = source.getEnd();
+	for (std::vector<int>::iterator it = source.getBegin(); it != ite; it++)
+	{
+		out << "[" << *it << "]";
+		if (it + 1 != ite)
+			out << std::endl;
+	}
+	return (out);
+}
