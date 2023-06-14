@@ -6,19 +6,12 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 09:08:09 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/12 20:09:39 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/14 10:35:58 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-//map
-bool	btc(std::string const arg)//input.txt
-{
-	if (arg.empty())
-		throw (std::invalid_argument("Error : could not open file."));
-
-	return (1);
-}
+#include "BitcoinExchange.hpp"
 
 int	main(int argc, char** argv)
 {
@@ -28,7 +21,10 @@ int	main(int argc, char** argv)
 			throw (std::invalid_argument("Error : could not open file."));
 		if (argc > 2)
 			throw (std::invalid_argument("Error : too many arguments."));
-		btc(argv[1]);
+		BitcoinExchange core(argv[1]);
+		core.checkFiles();
+		core.buildMap();
+		core.displayResults();
 	}
 	catch (std::exception const& e)
 	{

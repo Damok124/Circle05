@@ -6,20 +6,21 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/06/11 11:30:17 by zharzi           ###   ########.fr        #
+#    Updated: 2023/06/14 10:48:42 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = btc
 
 SRCS = \
+BitcoinExchange.cpp \
 main.cpp
 
 OBJ = $(SRCS:.cpp=.o)
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
 .cpp.o:
 	@$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)
