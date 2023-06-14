@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:25 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/14 10:35:56 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/14 17:27:49 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <cstdlib>
+# include <cstring>
 # include <iostream>
 # include <fstream>
 # include <sys/stat.h>

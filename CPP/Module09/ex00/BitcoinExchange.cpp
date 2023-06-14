@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:27 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/14 13:28:00 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/14 19:06:27 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,47 +58,37 @@ static bool	isReadable(char const* filename)
 	return (1);
 }
 
-static std::string	extractDate(std::string const line)
+static std::string	extractDate(std::string const& line)
 {
-	if (line.size() >= 10 && line[4] == '-' && line[7] == '-'
-	&& (line.find_first_not_of("0123456789", 0, 4) == std::string::npos)
-	&& (line.find_first_not_of("0123456789", 5, 2) == std::string::npos)
-	&& (line.find_first_not_of("0123456789", 8, 2) == std::string::npos))
-		return (line.substr(0, 10));
-	return ("invalid date");
-	// long unsigned int i = 0;
-	// while (i < line.size())
-	// {
-	// 	if (line.find_first_not_of("0123456789", 0, 4) != std::string::npos)
-	// 		{
-	// 			std::cout << line << " " << line.find_first_not_of("0123456789", 0, 4) << std::endl;
-	// 			return ("invalid date");
-	// 		}
-	// 	if (i >= 5 && i < 7)
-	// 		if (line.find_first_not_of("0123456789", 5, 2) != std::string::npos)
-	// 			return ("invalid date");
-	// 	if (i >= 8 && i < 10)
-	// 		if (line.find_first_not_of("0123456789", 8, 2) != std::string::npos)
-	// 			return ("invalid date");
-	// 	if (i == 4 || i == 7)
-	// 		if (line[i] != '-')
-	// 			return ("invalid date");
-	// 	i++;
-	// }
-	// if (i != 10 || line[10] != ',')
-	// 	return ("invalid date");
-	// return (line.substr(0, 10));
+	if (line.size() < 10 || line[4] != '-' || line[7] != '-')
+		return ("invalid date");
+	std::string pure = line.substr(0, 4) + line.substr(5, 2) + line.substr(8, 2);
+	for (long unsigned int i = 0; i < pure.size(); i++)
+	{
+		if (std::strchr("0123456789", pure[i]) == NULL)
+			return ("invalid date");
+	}
+	return (line.substr(0, 10));
 }
 
 static float	extractValue(std::string line)
 {
+	line = line.substr(11);
 	size_t pos = 0;
-	if (line.find_first_not_of("0123456789.") != std::string::npos)
-		return (-1.0f);
-	if (line.find_first_of('.', pos) != std::string::npos && line.find_first_of('.', pos) != std::string::npos)
-		return (-1.0f);
+	pos = line.find('.', pos);
+	if (pos != std::string::npos)
+	{
+		pos = line.find('.', pos + 1);
+		if (pos != std::string::npos)
+			return (-1.0f);
+	}
 	if (line[0] == '.')
 		return (-1.0f);
+	for (long unsigned int i = 0; i < line.size(); i++)
+	{
+		if (std::strchr("0123456789.", line[i]) == NULL)
+			return (-1.0f);
+	}
 	return (strtof(line.c_str(), NULL));
 }
 
@@ -118,7 +108,6 @@ static bool	checkDatabaseFormat(char const* filename)
 		{
 			if (extractDate(line) == "invalid date")
 				throw (std::invalid_argument("pop2"));
-			line = line.substr(11);
 			if (extractValue(line) < 0)
 				throw (std::invalid_argument("pop3"));
 			i++;
