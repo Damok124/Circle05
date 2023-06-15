@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:27 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/15 17:17:58 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/15 21:54:04 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,6 @@ static int dateToInt(std::string const& date)
 	std::string number = date.substr(0, 4) + date.substr(5, 2) + date.substr(8, 2);
 	return (atoi(number.c_str()));
 }
-
-// static std::string intToDate(int number)
-// {
-// 	std::stringstream str;
-// 	int year = number / 10000;
-// 	int month = (number / 100) % 100;
-// 	int day = number % 100;
-// 	str << year << '-';
-// 	if (month < 10)
-// 		str << '0' << month << '-';
-// 	else
-// 		str << month << '-';
-// 	if (day < 10)
-// 		str << '0' << day;
-// 	else
-// 		str << day;
-// 	return (str.str());
-// }
 
 static bool isFile(char const *filename)
 {
@@ -114,7 +96,7 @@ static std::string	extractDate(std::string const& line)
 	return (line.substr(0, 10));
 }
 
-static float	extractExchangeRate(std::string line)
+static float	extractValue(std::string line)
 {
 	size_t pos = 0;
 	pos = line.find('.', pos);
@@ -157,7 +139,7 @@ static bool	checkDatabaseFormat(char const* filename)
 			if (line[10] != ',')
 				throw (std::exception());
 			line = line.substr(11);
-			if (extractExchangeRate(line) < 0)
+			if (extractValue(line) < 0)
 				throw (std::exception());
 			i++;
 		}
@@ -209,7 +191,7 @@ void	BitcoinExchange::buildMap(void)
 
 	std::getline(file, line);
 	while (std::getline(file, line))
-		_map.insert(std::map<std::string, float>::value_type(extractDate(line), extractExchangeRate(line.substr(11))));
+		_map.insert(std::map<std::string, float>::value_type(extractDate(line), extractValue(line.substr(11))));
 	file.close();
 }
 
@@ -226,7 +208,7 @@ double	BitcoinExchange::useMap(std::string const& line) const
 	if (date < begin)
 		return (value);
 	if (date > end)
-		return (static_cast<double>(ite->second) * static_cast<double>(extractExchangeRate(line.substr(13))));
+		return (static_cast<double>(ite->second) * static_cast<double>(extractValue(line.substr(13))));
 	ite++;
 	while (it != ite)
 	{
@@ -236,7 +218,7 @@ double	BitcoinExchange::useMap(std::string const& line) const
 			break ;
 		it++;
 	}
-	result = static_cast<double>(value) * static_cast<double>(extractExchangeRate(line.substr(13)));
+	result = static_cast<double>(value) * static_cast<double>(extractValue(line.substr(13)));
 	return (result);
 }
 
@@ -256,13 +238,13 @@ void	BitcoinExchange::displayResults(void) const
 				throw (std::invalid_argument("Error : bad input => "));
 			if (line[10] != ' ' || line[11] != '|' || line[12] != ' ')
 				throw (std::invalid_argument("Error : bad input => "));
-			if (line[13] == '-' && extractExchangeRate(line.substr(14)) > 0)
+			if (line[13] == '-' && extractValue(line.substr(14)) > 0)
 				throw (std::invalid_argument("Error : not a positive number."));
-			if ((line[13] == '-' && extractExchangeRate(line.substr(14)) <= 0)
-			|| (line[13] != '-' && extractExchangeRate(line.substr(13)) < 0))
+			if ((line[13] == '-' && extractValue(line.substr(14)) <= 0)
+			|| (line[13] != '-' && extractValue(line.substr(13)) < 0))
 				throw (std::invalid_argument("Error : bad input => "));
-			if ((line[13] == '-' && extractExchangeRate(line.substr(14)) > 1000)
-			|| (line[13] != '-' && extractExchangeRate(line.substr(13)) > 1000))
+			if ((line[13] == '-' && extractValue(line.substr(14)) > 1000)
+			|| (line[13] != '-' && extractValue(line.substr(13)) > 1000))
 				throw (std::invalid_argument("Error : too large number."));
 		}
 		catch(const std::exception& e)
@@ -275,11 +257,8 @@ void	BitcoinExchange::displayResults(void) const
 				std::cout << str << line << std::endl;
 		}
 		if (valid)
-			std::cout << extractDate(line) << " => " << extractExchangeRate(line.substr(13))
+			std::cout << extractDate(line) << " => " << extractValue(line.substr(13))
 			<< " = " << useMap(line) << std::endl;
 	}
 	file.close();
 }
-//format content check	• Each line in this file must use the following format: "date | value".
-//						• A valid date will always be in the following format: Year-Month-Day.
-//						• A valid value must be either a float or a positive integer between 0 and 1000.
