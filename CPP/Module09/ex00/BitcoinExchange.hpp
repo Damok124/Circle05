@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:42:25 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/14 17:27:49 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/15 17:09:31 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 # include <cstdlib>
 # include <cstring>
 # include <iostream>
+# include <iomanip>
 # include <fstream>
 # include <sys/stat.h>
+# include <sstream>
 # include <map>
 
 class BitcoinExchange
@@ -38,6 +40,7 @@ class BitcoinExchange
 
 		void	checkFiles(void) const;
 		void	buildMap(void);
+		double	useMap(std::string const& line) const;
 		void	displayResults(void) const;
 };
 
