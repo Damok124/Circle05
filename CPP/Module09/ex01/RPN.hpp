@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 22:42:39 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/16 00:51:50 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/16 10:13:25 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,17 @@ class RPN
 		RPN(RPN const& source);
 		RPN& operator=(RPN const& source);
 
+		int		add(void);
+		int		substract(void);
+		int		multiply(void);
+		int		divide(void);
+
 	public :
 		RPN(std::string const& operation);
 		~RPN();
 
 		void	checkNotation(void) const;
-		void	calculation(void) const;
+		void	calculation(void);
 };
 
 #endif

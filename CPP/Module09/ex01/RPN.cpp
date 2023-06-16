@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 22:42:42 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/16 00:59:21 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/16 10:13:23 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,56 @@ void	RPN::checkNotation(void) const
 		throw (std::invalid_argument("Error : wrong content."));
 }
 
-void	RPN::calculation(void) const
+int	RPN::add()
 {
+	long int test = static_cast<long int>(A) + static_cast<long int>(B);
+	int	result = A + B;
+	if (test != static_cast<long int>result)
+}
+
+int	RPN::substract()
+{
+
+}
+int	RPN::divide()
+{
+
+}
+int	RPN::multiply()
+{
+
+}
+
+void	RPN::calculation(void)
+{
+	std::string reduced = removeSpaces(_operation);
+	for (int i = 0; i < reduced.size(); i++)
+	{
+		if (std::strchr("0123456789", reduced[i]) != NULL)
+			_stack.c.push_back(atoi(reduced[i]));//ajouter a la stack, syntax error
+		else if (std::strchr("+-/=", reduced[i]) != NULL)//et stack size < 2
+			throw (std::logic_error("Error"));
+		else if (std::strchr("+-/=", reduced[i]) != NULL)
+		{
+			switch (reduced[i])
+			{
+				case '+' :
+					add();
+					break ;
+				case '-' :
+					substract();
+					break ;
+				case '/' :
+					divide();
+					break ;
+				case '*' :
+					multiply();
+					break ;
+				default :
+					throw (std::invalid_argument("Error"));
+			}
+		}
+		//effectuer le calcul, produire les fonctions, maj l'avant dernier, supprimer le dernier
+		//prevoir overflow, par exemple comparer long int before after via itoa puis atol
+	}
 }
