@@ -6,7 +6,7 @@
 #    By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/06/14 10:48:42 by zharzi           ###   ########.fr        #
+#    Updated: 2023/06/17 00:39:14 by zharzi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ OBJ = $(SRCS:.cpp=.o)
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 .cpp.o:
 	@$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)

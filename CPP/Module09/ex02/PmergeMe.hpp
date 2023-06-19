@@ -1,44 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RPN.hpp                                            :+:      :+:    :+:   */
+/*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/15 22:42:39 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/18 00:00:36 by zharzi           ###   ########.fr       */
+/*   Created: 2023/06/18 00:03:28 by zharzi            #+#    #+#             */
+/*   Updated: 2023/06/18 18:05:58 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RPN_HPP
-# define RPN_HPP
+#ifndef PMERGEME_HPP
+# define PMERGEME_HPP
 
 # include <iostream>
+# include <algorithm>
 # include <cstring>
-# include <stack>
+# include <vector>
+# include <deque>
 
-class RPN
+class PmergeMe
 {
 	private:
-		std::string		_operation;
-		std::stack<int>	_stack;
-		long int	_result;
+		std::vector<int>	_vec;
+		std::deque<int>		_deq;
+		char**	_args;
+		PmergeMe();
 
-		RPN();
-		RPN(RPN const& source);
-		RPN& operator=(RPN const& source);
+	public:
+		PmergeMe(char **args);
+		PmergeMe(PmergeMe const& source);
+		PmergeMe& operator=(PmergeMe const& source);
+		~PmergeMe();
 
-		void	add(void);
-		void	substract(void);
-		void	multiply(void);
-		void	divide(void);
-
-	public :
-		RPN(std::string const& operation);
-		~RPN();
-
-		void	checkNotation(void) const;
-		void	calculation(void);
+		void	buildVector(void);
+		void	buildDeque(void);
+		void	parsing(void);
 };
 
 #endif
