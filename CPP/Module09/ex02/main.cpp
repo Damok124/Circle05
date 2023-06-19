@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 09:08:09 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/18 11:14:41 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/19 17:03:30 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char** argv)
 		{
 			PmergeMe data(argv + 1);
 			data.parsing();
+			data.sort();
 		}
 	}
 	catch (std::exception const& e)
@@ -31,11 +32,8 @@ int	main(int argc, char** argv)
 	return (0);
 }
 
-// • Your program must be able to use a positive integer sequence as argument.
 // • Your program must use the merge-insert sort algorithm to sort the positive integer
-// sequence.
-
-// Ford-Johnson algorithm.
+// sequence. Ford-Johnson algorithm.
 
 // If an error occurs during program execution, an error message should be displayed
 // on the standard output.

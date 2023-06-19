@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 00:03:17 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/19 01:08:55 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/19 17:15:48 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,9 @@ void	PmergeMe::parsing(void)
 	if (!checkDuplicates(_vec))
 		throw (std::invalid_argument("Error : duplicates found in arguments"));
 	buildDeque();
+}
+
+void	PmergeMe::sort(void)
+{
+
 }

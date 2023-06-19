@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 00:03:28 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/18 18:05:58 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/19 17:02:46 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ class PmergeMe
 		void	buildVector(void);
 		void	buildDeque(void);
 		void	parsing(void);
+		void	sort(void);
 };
 
 #endif
