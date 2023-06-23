@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 00:03:17 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/23 14:49:13 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:56:36 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ static bool	checkArgs(char** args)
 			if (strchr("0123456789", arg[j]) == NULL)
 				return (0);
 		}
-		test = strtol(args[i]);
+		test = strtol(args[i], NULL, 10);
+		if (test != static_cast<long>(std::atoi(args[i])))
+			return (0);
 	}
 	return (1);
 }
