@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 00:03:28 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/20 23:24:16 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/21 17:01:01 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class PmergeMe
 	private:
 		std::vector<int>	_vec;
 		std::deque<int>		_deq;
-		unsigned long int	_size;
 		char**	_args;
 		PmergeMe();
 
@@ -37,12 +36,10 @@ class PmergeMe
 
 		void	showVector(std::string const& intro) const;
 		void	showDeque(std::string const& intro) const;
-		void	buildVector(void);
-		void	buildDeque(void);
+		void	initVector(void);
+		void	initDeque(void);
 		void	parsing(void);
-		void	sort(void);
+		void	showSort(void);
 };
-
-std::ostream& operator<<(std::ostream& out, PmergeMe& source);
 
 #endif

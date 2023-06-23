@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 22:42:42 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/18 00:00:29 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:45:43 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ static std::string	removeSpaces(std::string const& operation)
 void	RPN::checkNotation(void) const
 {
 	if (_operation.empty())
-		throw (std::invalid_argument("Error : empty argument is invalid"));
+		throw (std::invalid_argument("Error : invalid argument(s)."));
 	if (!checkSpaces(_operation))
-		throw (std::invalid_argument("Error : wrong spacing."));
+		throw (std::invalid_argument("Error : invalid argument(s)."));
 	if (_operation.size() % 2 == 0)
-		throw (std::invalid_argument("Error : check your argument ending"));
+		throw (std::invalid_argument("Error : invalid argument(s)."));
 	std::string reduced = removeSpaces(_operation);
 	if (!checkElements(reduced))
 		throw (std::invalid_argument("Error : wrong content."));
@@ -146,7 +146,7 @@ void	RPN::calculation(void)
 	{
 		if (std::strchr("0123456789", reduced[i]) != NULL)
 			_stack.push(reduced[i] - '0');
-		else if (_stack.size() < 2 && std::strchr("+-/=", reduced[i]) != NULL)
+		else if (_stack.size() < 2 && std::strchr("+-/*", reduced[i]) != NULL)
 			throw (std::logic_error("Error"));
 		else if (std::strchr("+-/*", reduced[i]) != NULL)
 		{

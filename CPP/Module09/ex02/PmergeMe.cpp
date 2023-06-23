@@ -6,7 +6,7 @@
 /*   By: zharzi <zharzi@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 00:03:17 by zharzi            #+#    #+#             */
-/*   Updated: 2023/06/21 00:20:13 by zharzi           ###   ########.fr       */
+/*   Updated: 2023/06/23 14:49:13 by zharzi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ PmergeMe::PmergeMe(PmergeMe const& source)
 PmergeMe& PmergeMe::operator=(PmergeMe const& source)
 {
 	if (this != &source)
-	{
 		*this = PmergeMe(source);
-	}
 	return (*this);
 }
 
@@ -44,6 +42,7 @@ PmergeMe::~PmergeMe()
 static bool	checkArgs(char** args)
 {
 	std::string arg;
+	long int	test = 0;
 	for (int i = 0; args[i]; i++)
 	{
 		arg = args[i];
@@ -54,24 +53,21 @@ static bool	checkArgs(char** args)
 			if (strchr("0123456789", arg[j]) == NULL)
 				return (0);
 		}
+		test = strtol(args[i]);
 	}
 	return (1);
 }
 
-void	PmergeMe::buildVector(void)
+void	PmergeMe::initVector(void)
 {
 	for (int i = 0; _args[i]; i++)
-	{
 		_vec.push_back(atoi(_args[i]));
-	}
 }
 
-void	PmergeMe::buildDeque(void)
+void	PmergeMe::initDeque(void)
 {
 	for (int i = 0; _args[i]; i++)
-	{
 		_deq.push_back(atoi(_args[i]));
-	}
 }
 
 static bool	checkDuplicates(std::vector<int> copy)
@@ -90,14 +86,13 @@ void	PmergeMe::parsing(void)
 {
 	if (!checkArgs(_args))
 		throw (std::invalid_argument("Error : wrong argument(s)"));
-	buildVector();
+	initVector();
 	if (!checkDuplicates(_vec))
 		throw (std::invalid_argument("Error : duplicates found in arguments"));
-	buildDeque();
-	_size = _vec.size();
+	initDeque();
 }
 
-static std::vector<int> mergeInsertVector(std::vector<int> const& source)
+static std::vector<int>	mergeInsertVector(std::vector<int> const& source)
 {
 	if (source.size() == 1)
 		return (source);
@@ -173,22 +168,22 @@ static std::deque<int> mergeInsertDeque(std::deque<int> const& source)
 	return (left);
 }
 
-void	PmergeMe::sort(void)
+void	PmergeMe::showSort(void)
 {
-	std::time_t begin = std::time(NULL);
+	clock_t startVec = clock();
 	showVector("Before :    ");
 	_vec = mergeInsertVector(_vec);
 	showVector("After :     ");
-	std::time_t end = std::time(NULL);
+	clock_t endVec = clock();
 	std::cout << "Time to process a range of " << _vec.size()
-	<< " elements with std::vector : " << (end - begin) << " us" << std::endl;//choisir ut correcte
-	begin = std::time(NULL);
-	showDeque("Before :    ");
+	<< " elements with std::vector : " << static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC << " sec" << std::endl;//choisir ut correcte
+	clock_t startDeq = clock();
+	// showDeque("Before :    ");
 	_deq = mergeInsertDeque(_deq);
-	showDeque("After :     ");
-	end = std::time(NULL);
+	// showDeque("After :     ");
+	clock_t endDeq = clock();
 	std::cout << "Time to process a range of " << _deq.size()
-	<< " elements with std::deque : " << (end - begin) << " us" << std::endl;//choisir ut correcte
+	<< " elements with std::deque  : " << static_cast<double>(endDeq - startDeq) / CLOCKS_PER_SEC << " sec" << std::endl;//choisir ut correcte
 }
 
 void	PmergeMe::showVector(std::string const& intro) const
@@ -196,9 +191,7 @@ void	PmergeMe::showVector(std::string const& intro) const
 	std::vector<int>::const_iterator ite = _vec.end();
 	std::cout << intro;
 	for (std::vector<int>::const_iterator it = _vec.begin(); it != ite; it++)
-	{
 		std::cout << *it << " ";
-	}
 	std::cout << std::endl;
 }
 
@@ -207,14 +200,6 @@ void	PmergeMe::showDeque(std::string const& intro) const
 	std::deque<int>::const_iterator ite = _deq.end();
 	std::cout << intro;
 	for (std::deque<int>::const_iterator it = _deq.begin(); it != ite; it++)
-	{
 		std::cout << *it << " ";
-	}
 	std::cout << std::endl;
-}
-
-std::ostream& operator<<(std::ostream& out, PmergeMe const& source)
-{
-	(void)source;//servira a annoncer
-	return (out);
 }
