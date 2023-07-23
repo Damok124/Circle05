@@ -5,6 +5,8 @@ RUN         apt upgrade -y
 RUN         apt install vim -y
 RUN         apt-get install mariadb-server -y
 
-COPY        conf/50-server.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
+COPY        conf/50-server.cnf  /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY        tools/script.sh     /tmp/script.sh
 
-# Rendons ensuite visite au fichier de configuration de MySQL, appelé  50-server.cnf  et se trouvant dans  etc/mysql/mariadb.conf.d/50-server.cnf
+RUN         chmod +x /tmp/script.sh
+ENTRYPOINT  ["/bin/bash", "/tmp/script.sh"]
