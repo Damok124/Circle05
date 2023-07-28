@@ -24,4 +24,6 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 COPY /conf/autoconfig.sh /tmp/autoconfig.sh
 
+RUN mkdir -p /run/php
+
 ENTRYPOINT ["/bin/bash", "/tmp/autoconfig.sh"]
