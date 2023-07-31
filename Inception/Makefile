@@ -10,31 +10,29 @@
 #                                                                              #
 # **************************************************************************** #
 
-# NAME = a.out
+all :
+	mkdir /home/zharzi/data/mariadb -p
+	mkdir /home/zharzi/data/wordpress -p
+	docker compose -f ./srcs/docker-compose.yml up -d --build
 
-# SRCS = \
-# main.cpp
+clean :
+	docker compose -f ./srcs/docker-compose.yml down
 
-# OBJ = $(SRCS:.cpp=.o)
+cleandata :
+	docker compose -f ./srcs/docker-compose.yml down -v
+	sudo rm -rf /home/zharzi/data/mariadb
+	sudo rm -rf /home/zharzi/data/wordpress
 
-# CC = c++
+fclean : cleandata
+	docker system prune -af
 
-# FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+logs :	
+	docker compose  -f ./srcs/docker-compose.yml logs
 
-# .cpp.o:
-# 	@$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)
+ref : fclean all
 
-# all : $(NAME)
+red : cleandata all
 
-# $(NAME) : $(OBJ)
-# 	@$(CC) $(FLAGS) $(OBJ) -I. -o $(NAME)
+re : clean all
 
-# clean :
-# 	@rm -f $(OBJ)
-
-# fclean : clean
-# 	@rm -f $(NAME)
-
-# re : fclean all
-
-# .PHONY : all clean fclean re
+.PHONY : all clean cleandata fclean re

@@ -1,52 +1,56 @@
-version: ‘3’
+version: ‘3.8’
 
 services:
 
   mariadb:
     container_name: mariadb
     networks:
-    - inception
+      - inception
     build:
-    context: requirements/mariadb
-    dockerfile: Dockerfile
+      context: requirements/mariadb
+      args:
+        NAME : ${SQL_DATABASE}
+        USER : ${SQL_USER}
+        PASSWORD : ${SQL_PASSWORD}
+    # dockerfile: Dockerfile
     env_file: .env
     volumes:
-    - mariadb:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     restart: unless-stopped
-    expose:
-    - "3306"
+    ports:
+      - "3306:3306"
 
   nginx:
     container_name: nginx
     volumes:
-    - wordpress:/var/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
-    - inception
+      - inception
     depends_on:
-    - wordpress
-    build:
-    context: requirements/nginx
-    dockerfile: Dockerfile
+      - wordpress
+    build: requirements/nginx
+    # context: requirements/nginx
+    # dockerfile: Dockerfile
     env_file: .env
     ports:
-    - "443:443"
+      - "443:443"
     restart: on-failure
 
   wordpress:
     container_name: wordpress
     env_file: .env
     volumes:
-    - wordpress:/var/www/wordpress
+      - wordpress:/var/www/wordpress
     networks:
-    - inception
-    build:
-    context: requirements/wordpress
-    dockerfile: Dockerfile
+      - inception
+    build: requirements/wordpress
+    # context: requirements/wordpress
+    # dockerfile: Dockerfile
     depends_on:
-    - mariadb
+      - mariadb
     restart: on-failure
-    expose: 
-    - "9000"
+    ports:
+      - "9000:9000"
 
 volumes:
 
@@ -55,15 +59,15 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-    device: '/home/zharzi/data/wordpress'
+      device: '/home/zharzi/data/wordpress'
 
   mariadb:
-  driver: local
-  driver_opts:
-    type: 'none' 
-    o: 'bind'
-    device: '/home/zharzi/data/mariadb'
+    driver: local
+    driver_opts:
+      type: 'none' 
+      o: 'bind'
+      device: '/home/zharzi/data/mariadb'
 
 networks:
   inception:
-  driver: bridge
+    driver: bridge

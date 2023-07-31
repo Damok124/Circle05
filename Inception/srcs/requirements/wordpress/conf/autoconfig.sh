@@ -1,21 +1,22 @@
-sleep 10
-
-# wp core download    --allow-root --path='/var/www/wordpress'
+#!/bin/bash
+#sleep 10
+cd /var/www/wordpress;
+wp core download    --allow-root
 
 wp config create	--allow-root \
                     --dbname=$SQL_DATABASE \
                     --dbuser=$SQL_USER \
                     --dbpass=$SQL_PASSWORD \
-                    --dbhost=mariadb:3306 --path='/var/www/wordpress'
+                    --dbhost='mariadb' \
 
 wp core install --allow-root \
-                --url='https://zharzi.42.fr.com' \
+                --url='https://zharzi.42.fr' \
                 --title='Simpliest Wordpress Ever' \
                 --admin_user='admin' \
                 --admin_password='password' \
                 --admin_email='zharzi@student.42angouleme.fr' \
-                --path='/var/www/wordpress'
+            
 
-wp user create --allow-root new_user new_user@zharzi.42.fr --role=subscriber --path='/var/www/wordpress'
+wp user create --allow-root new_user new_user@zharzi.42.fr --role=subscriber
 
-/usr/sbin/php-fpm7.3 -F 
+/usr/sbin/php-fpm7.3 -F -R
