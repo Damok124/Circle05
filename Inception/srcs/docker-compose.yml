@@ -1,73 +1,72 @@
-version: ‘3.8’
+version: ‘3’
 
 services:
 
   mariadb:
-    container_name: mariadb
-    networks:
-      - inception
     build:
       context: requirements/mariadb
       args:
-        NAME : ${SQL_DATABASE}
-        USER : ${SQL_USER}
-        PASSWORD : ${SQL_PASSWORD}
-    # dockerfile: Dockerfile
+        NAME: ${DB}
+        USER: ${DB_USER}
+        PASSWORD: ${DB_PASSWORD}
+    container_name: mariadb
     env_file: .env
-    volumes:
-      - mariadb:/var/lib/mysql
-    restart: unless-stopped
+    networks:
+      - Docker network
     ports:
       - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - DB:/var/lib/mysql
 
-  nginx:
-    container_name: nginx
+  wordpress:
+    build:
+      context: requirements/wordpress
+    container_name: wordpress
+    env_file: .env
+    depends_on:
+      - mariadb
+    networks:
+      - Docker network
+    ports:
+      - "9000:9000"
+    restart: on-failure
     volumes:
       - wordpress:/var/www/wordpress
-    networks:
-      - inception
+
+  nginx:
+    build:
+      context: requirements/nginx
+      args:
+        DOMAIN: ${DOMAIN_NAME}
+    container_name: nginx
+    env_file: .env
     depends_on:
       - wordpress
-    build: requirements/nginx
-    # context: requirements/nginx
-    # dockerfile: Dockerfile
-    env_file: .env
+    networks:
+      - Docker network
     ports:
       - "443:443"
     restart: on-failure
-
-  wordpress:
-    container_name: wordpress
-    env_file: .env
     volumes:
       - wordpress:/var/www/wordpress
-    networks:
-      - inception
-    build: requirements/wordpress
-    # context: requirements/wordpress
-    # dockerfile: Dockerfile
-    depends_on:
-      - mariadb
-    restart: on-failure
-    ports:
-      - "9000:9000"
 
 volumes:
 
   wordpress:
     driver: local
     driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/home/zharzi/data/wordpress'
+      type: none
+      o: bind
+      device: /home/zharzi/data/wordpress
 
-  mariadb:
+  DB:
     driver: local
     driver_opts:
-      type: 'none' 
-      o: 'bind'
-      device: '/home/zharzi/data/mariadb'
+      type: none
+      o: bind
+      device: /home/zharzi/data/DB
 
 networks:
-  inception:
+  Docker network:
     driver: bridge

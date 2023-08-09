@@ -11,28 +11,28 @@
 # **************************************************************************** #
 
 all :
-	mkdir /home/zharzi/data/mariadb -p
+	mkdir /home/zharzi/data/DB -p
 	mkdir /home/zharzi/data/wordpress -p
-	docker compose -f ./srcs/docker-compose.yml up -d --build
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
+
 
 clean :
-	docker compose -f ./srcs/docker-compose.yml down
+	docker-compose -f ./srcs/docker-compose.yml down
 
-cleandata :
-	docker compose -f ./srcs/docker-compose.yml down -v
-	sudo rm -rf /home/zharzi/data/mariadb
+vclean :
+	docker-compose -f ./srcs/docker-compose.yml down -v
+	sudo rm -rf /home/zharzi/data/DB
 	sudo rm -rf /home/zharzi/data/wordpress
+	sudo rm -rf /home/zharzi/data
 
-fclean : cleandata
+fclean : vclean
 	docker system prune -af
 
 logs :	
-	docker compose  -f ./srcs/docker-compose.yml logs
-
-ref : fclean all
-
-red : cleandata all
+	docker-compose -f ./srcs/docker-compose.yml logs
 
 re : clean all
 
-.PHONY : all clean cleandata fclean re
+fre : fclean all
+
+.PHONY : all clean vclean fclean logs re fre
