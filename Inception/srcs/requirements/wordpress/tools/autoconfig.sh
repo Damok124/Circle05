@@ -17,6 +17,6 @@ wp core install --allow-root \
                 --admin_password=$ADMIN_PASSWORD \
                 --admin_email=$ADMIN_EMAIL
             
-wp user create --allow-root "$USER_NAME" "$USER_NAME@$DOMAIN_NAME" --role=subscriber
+wp user create --allow-root "$USER_NAME" "$USER_NAME@$DOMAIN_NAME" --user_pass=$USER_PWD --role=subscriber
 
 /usr/sbin/php-fpm7.3 -F -R

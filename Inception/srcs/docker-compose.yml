@@ -13,8 +13,6 @@ services:
     env_file: .env
     networks:
       - Docker network
-    ports:
-      - "3306:3306"
     restart: unless-stopped
     volumes:
       - DB:/var/lib/mysql
@@ -28,8 +26,6 @@ services:
       - mariadb
     networks:
       - Docker network
-    ports:
-      - "9000:9000"
     restart: on-failure
     volumes:
       - wordpress:/var/www/wordpress
