@@ -1,40 +1,38 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: zharzi <zharzi@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/08 22:22:05 by zharzi            #+#    #+#              #
-#    Updated: 2023/08/10 18:35:51 by zharzi           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+GREEN = /bin/echo -e "\x1b[1;3;32m$1\x1b[0m"
 
-NAME = ircserv
+CXX = c++
 
-SRCS = \
-main.cpp
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+
+SRCS =  Server.cpp \
+		User.cpp \
+		Channel.cpp \
+		tools.cpp \
+		main.cpp \
 
 OBJ = $(SRCS:.cpp=.o)
 
-CC = c++
+%.o : %.cpp
+	$(CXX) $(CXXFLAGS) -c -g $< -o $@
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+NAME = ircserv
 
-.cpp.o:
-	@$(CC) $(FLAGS) -c $< -o $(<:.cpp=.o)
+all:		$(NAME)
 
-all : $(NAME)
+$(NAME):	$(OBJ)
+		$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+		$(call GREEN,"Compilation success 😁")
 
-$(NAME) : $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) -I. -o $(NAME)
+clean:
+		rm -rf $(OBJ)
+		$(call GREEN,"The .o cleaned up !")
 
-clean :
-	@rm -f $(OBJ)
+fclean:		clean
+		rm -rf $(NAME)
+		$(call GREEN,"The rest too !")
 
-fclean : clean
-	@rm -f $(NAME)
+re:		fclean all
 
-re : fclean all
+.SILENT:
 
-.PHONY : all clean fclean re
+.PHONY:		all clean fclean re
